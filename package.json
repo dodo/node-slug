@@ -5,7 +5,7 @@
 , "author": "dodo (https://github.com/dodo)"
 , "repository": {"type": "git", "url": "git://github.com/dodo/node-slug.git"}
 , "main": "slug.js"
-, "engines": {"node": "0.4.x"}
+, "engines": {"node": ">= 0.4.x"}
 , "keywords": ["slugify", "slug", "string", "utf8", "utf-8", "unicode", "url"]
 , "scripts": {
     "preinstall": "#preinstall DO NOTHING",
