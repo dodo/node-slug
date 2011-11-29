@@ -12,6 +12,6 @@
     "install": "node-waf configure build",
     "update": "node-waf build"}
 , "dependencies": {
-    "unicode": ">= 0.2.0",
+    "unicode": ">= 0.2.1",
     "coffee-script": ">= 1.1.2"}
 }
