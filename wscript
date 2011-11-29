@@ -12,6 +12,7 @@ def configure(ctx):
     ctx.env.PATH.append(join(ctx.cwd, "node_modules", "coffee-script", "bin"))
     ctx.find_program("coffee", var="COFFEE", path_list=ctx.env.PATH)
     ctx.env.COFFEE_ARGS = "-co"
+    ctx.env.set_variant("default")
 
 
 def build(ctx):
