@@ -89,5 +89,5 @@ module.exports = slug = (string, replacement = '-') ->
         result += char
     result = result.replace(/^\s+|\s+$/g, '') # trim leading/trailing spaces
     result = result.replace(/[-\s]+/g, replacement) # convert spaces
-    result.replace(/-$/, '') # remove trailing separator
+    result.replace("#{replacement}$", '') # remove trailing separator
 
