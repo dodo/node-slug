@@ -7,7 +7,7 @@ slugifies every string, even when it contains unicode!
 ```bash
 master//node-slug » node
 > slug = require ('./slug')
-> slug()
+> slug('i ♥ unicode')
  'i-love-unicode'
 > slug('i ♥ unicode', '_') # If you prefer something else then `-` as seperator
  'i_love_unicode'
