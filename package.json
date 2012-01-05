@@ -8,10 +8,10 @@
 , "engines": {"node": ">= 0.4.x"}
 , "keywords": ["slugify", "slug", "string", "utf8", "utf-8", "unicode", "url"]
 , "scripts": {
-    "preinstall": "#preinstall DO NOTHING",
-    "install": "node-waf configure build",
-    "update": "node-waf build"}
+    "pre-publish": "cake build"}
 , "dependencies": {
-    "unicode": ">= 0.2.1",
+    "unicode": ">= 0.2.1"}
+, "devDependencies": {
+    "muffin": ">= 0.2.6",
     "coffee-script": ">= 1.1.2"}
 }

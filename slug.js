@@ -1,2 +1,2 @@
 
-module.exports = require('./build/default/slug')
+module.exports = require('./lib/slug')
