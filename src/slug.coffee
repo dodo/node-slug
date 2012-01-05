@@ -73,7 +73,7 @@ char_map = {
 }
 
 
-module.exports = slug = (string) ->
+module.exports = slug = (string, replacement = '-') ->
     result = ""
     for char, i in string
         code = string.charCodeAt(i)
@@ -88,6 +88,6 @@ module.exports = slug = (string) ->
         char = char.replace(/[^\w\s$\*\_\+~\.\(\)\'\"\!\-:@]/g, '') # allowed
         result += char
     result = result.replace(/^\s+|\s+$/g, '') # trim leading/trailing spaces
-    result = result.replace(/[-\s]+/g, '-') # convert spaces
+    result = result.replace(/[-\s]+/g, replacement) # convert spaces
     result.replace(/-$/, '') # remove trailing separator
 
