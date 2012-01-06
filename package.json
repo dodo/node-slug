@@ -9,7 +9,7 @@
 , "keywords": ["slugify", "slug", "string", "utf8", "utf-8", "unicode", "url"]
 , "scripts": {
     "test": "cake test",
-    "pre-publish": "cake build"}
+    "prepublish": "cake build"}
 , "dependencies": {
     "unicode": ">= 0.3.0"}
 , "devDependencies": {
