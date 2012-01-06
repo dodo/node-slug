@@ -8,12 +8,13 @@
 , "engines": {"node": ">= 0.4.x"}
 , "keywords": ["slugify", "slug", "string", "utf8", "utf-8", "unicode", "url"]
 , "scripts": {
+    "test": "cake test",
     "pre-publish": "cake build"}
 , "dependencies": {
-    "unicode": ">= 0.2.1",
-	"mocha": "0.3.3",
-	"should": "0.3.2"}
+    "unicode": ">= 0.2.1"}
 , "devDependencies": {
+    "mocha": "0.3.3",
+    "should": "0.3.2",
     "muffin": ">= 0.2.6",
     "coffee-script": ">= 1.1.2"}
 }
