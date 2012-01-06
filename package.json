@@ -10,7 +10,9 @@
 , "scripts": {
     "pre-publish": "cake build"}
 , "dependencies": {
-    "unicode": ">= 0.2.1"}
+    "unicode": ">= 0.2.1",
+	"mocha": "0.3.3",
+	"should": "0.3.2"}
 , "devDependencies": {
     "muffin": ">= 0.2.6",
     "coffee-script": ">= 1.1.2"}
