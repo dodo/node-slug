@@ -85,7 +85,7 @@ module.exports = slug = (string, replacement = '-') ->
             char = unicode.name.toLowerCase()
             char = char.replace(word, '') for word in removelist
             char = char.replace(/^\s+|\s+$/g, '')
-        char = char.replace(/[^\w\s$\*\_\+~\.\(\)\'\"\!\-:@]/g, '') # allowed
+        char = char.replace(/[^\w\s$\*\_\+~\.\(\)\!\-:@]/g, '') # allowed
         result += char
     result = result.replace(/^\s+|\s+$/g, '') # trim leading/trailing spaces
     result = result.replace(/[-\s]+/g, replacement) # convert spaces
