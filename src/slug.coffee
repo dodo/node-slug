@@ -29,8 +29,8 @@ char_map = {
     'Ά':'A', 'Έ':'E', 'Ί':'I', 'Ό':'O', 'Ύ':'Y', 'Ή':'H', 'Ώ':'W', 'Ϊ':'I',
     'Ϋ':'Y'
     #turkish
-    'ş':'s', 'Ş':'S', 'ı':'i', 'İ':'I', 'ç':'c', 'Ç':'C', 'ü':'u', 'Ü':'U',
-    'ö':'o', 'Ö':'O', 'ğ':'g', 'Ğ':'G'
+    'ş':'s', 'Ş':'S', 'ı':'i', 'İ':'I',
+    'ğ':'g', 'Ğ':'G'
     # russian
     'а':'a', 'б':'b', 'в':'v', 'г':'g', 'д':'d', 'е':'e', 'ё':'yo', 'ж':'zh',
     'з':'z', 'и':'i', 'й':'j', 'к':'k', 'л':'l', 'м':'m', 'н':'n', 'о':'o',
@@ -49,13 +49,13 @@ char_map = {
     'ž':'z', 'Č':'C', 'Ď':'D', 'Ě':'E', 'Ň': 'N', 'Ř':'R', 'Š':'S', 'Ť':'T',
     'Ů':'U', 'Ž':'Z'
     # polish
-    'ą':'a', 'ć':'c', 'ę':'e', 'ł':'l', 'ń':'n', 'ó':'o', 'ś':'s', 'ź':'z',
+    'ą':'a', 'ć':'c', 'ę':'e', 'ł':'l', 'ń':'n', 'ś':'s', 'ź':'z',
     'ż':'z', 'Ą':'A', 'Ć':'C', 'Ę':'e', 'Ł':'L', 'Ń':'N', 'Ś':'S',
     'Ź':'Z', 'Ż':'Z'
     # latvian
-    'ā':'a', 'č':'c', 'ē':'e', 'ģ':'g', 'ī':'i', 'ķ':'k', 'ļ':'l', 'ņ':'n',
-    'š':'s', 'ū':'u', 'ž':'z', 'Ā':'A', 'Č':'C', 'Ē':'E', 'Ģ':'G', 'Ī':'i',
-    'Ķ':'k', 'Ļ':'L', 'Ņ':'N', 'Š':'S', 'Ū':'u', 'Ž':'Z'
+    'ā':'a', 'ē':'e', 'ģ':'g', 'ī':'i', 'ķ':'k', 'ļ':'l', 'ņ':'n',
+    'ū':'u', 'Ā':'A', 'Ē':'E', 'Ģ':'G', 'Ī':'i',
+    'Ķ':'k', 'Ļ':'L', 'Ņ':'N', 'Ū':'u'
     # currency
     '€': 'euro', '₢': 'cruzeiro', '₣': 'french franc', '£': 'pound',
     '₤': 'lira', '₥': 'mill', '₦': 'naira', '₧': 'peseta', '₨': 'rupee',
@@ -85,7 +85,7 @@ module.exports = slug = (string, replacement = '-') ->
             char = unicode.name.toLowerCase()
             char = char.replace(word, '') for word in removelist
             char = char.replace(/^\s+|\s+$/g, '')
-        char = char.replace(/[^\w\s$\*\_\+~\.\(\)\'\"\!\-:@]/g, '') # allowed
+        char = char.replace(/[^\w\s$\*\_\+~\.\(\)\!\-:@]/g, '') # allowed
         result += char
     result = result.replace(/^\s+|\s+$/g, '') # trim leading/trailing spaces
     result = result.replace(/[-\s]+/g, replacement) # convert spaces
