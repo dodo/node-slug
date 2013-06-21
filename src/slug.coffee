@@ -73,7 +73,10 @@ char_map = {
 }
 
 
-module.exports = slug = (string, replacement = '-') ->
+module.exports = slug = (string, replacement = '-', forceLowercase = false) ->
+    if typeof replacement is 'boolean'
+        replacement = '-'
+        forceLowercase = replacement
     result = ""
     for char, i in string
         code = string.charCodeAt(i)
@@ -86,6 +89,8 @@ module.exports = slug = (string, replacement = '-') ->
             char = char.replace(word, '') for word in removelist
             char = char.replace(/^\s+|\s+$/g, '')
         char = char.replace(/[^\w\s$\*\_\+~\.\(\)\!\-:@]/g, '') # allowed
+        if forceLowercase
+            char = char.toLowerCase()
         result += char
     result = result.replace(/^\s+|\s+$/g, '') # trim leading/trailing spaces
     result = result.replace(/[-\s]+/g, replacement) # convert spaces
