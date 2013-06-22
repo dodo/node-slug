@@ -131,3 +131,9 @@ describe 'slug', ->
     it 'should allow forcing lowercase slugs', ->
         [slug('FOO Bar baZ').toLowerCase()].should.eql ['foo-bar-baz']
         [slug('FOO Bar baZ', replacement:'_').toLowerCase()].should.eql ['foo_bar_baz']
+
+    it 'should allow altering the charmap', ->
+        charmap = {
+            'f': 'ph', 'o':'0', 'b':'8', 'a':'4', 'r':'2', 'z':'5'
+        }
+        [slug("foo bar baz", {charmap}).toUpperCase()].should.eql ['PH00-842-845']
