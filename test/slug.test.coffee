@@ -14,7 +14,7 @@ describe 'slug', ->
         [slug 'foo] bar baz'].should.eql ['foo-bar-baz']
 
     it 'should leave allowed chars', ->
-        allowed = ['*', '+', '~', '.', '(', ')', '\'', '"', '!', ':', '@']
+        allowed = ['*', '+', '~', '.', '(', ')', "'", '"', '!', ':', '@']
         for a in allowed
             [slug "foo #{a} bar baz"].should.eql ["foo-#{a}-bar-baz"]
 
