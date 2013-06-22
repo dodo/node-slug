@@ -80,8 +80,9 @@ module.exports = slug = (string, opts = {}) ->
     opts.charmap ?= char_map
     result = ""
     for char, i in string
-        code = string.charCodeAt(i)
-        if opts.charmap[char]
+        unless opts.charmap[char]
+            code = string.charCodeAt(i)
+        else
             char = opts.charmap[char]
             code = char.charCodeAt(0)
         unicode = symbols[code]
