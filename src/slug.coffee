@@ -77,11 +77,12 @@ module.exports = slug = (string, opts = {}) ->
     if 'string' is typeof opts
         opts = replacement:opts
     opts.replacement ?= '-'
+    opts.charmap ?= char_map
     result = ""
     for char, i in string
         code = string.charCodeAt(i)
-        if char_map[char]
-            char = char_map[char]
+        if opts.charmap[char]
+            char = opts.charmap[char]
             code = char.charCodeAt(0)
         unicode = symbols[code]
         if unicode
@@ -94,3 +95,4 @@ module.exports = slug = (string, opts = {}) ->
     result = result.replace(/[-\s]+/g, opts.replacement) # convert spaces
     result.replace("#{opts.replacement}$", '') # remove trailing separator
 
+module.exports.charmap = char_map
