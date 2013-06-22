@@ -129,5 +129,5 @@ describe 'slug', ->
             [slug "foo #{char} bar baz"].should.eql ["foo-#{replacement}-bar-baz"]
 
     it 'should allow forcing lowercase slugs', ->
-        [slug 'FOO Bar baZ', true].should.eql ['foo-bar-baz']
-        [slug 'FOO Bar baZ', replacement:'_', lowerCase:true].should.eql ['foo_bar_baz']
+        [slug('FOO Bar baZ').toLowerCase()].should.eql ['foo-bar-baz']
+        [slug('FOO Bar baZ', replacement:'_').toLowerCase()].should.eql ['foo_bar_baz']

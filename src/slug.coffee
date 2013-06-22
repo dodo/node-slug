@@ -76,11 +76,8 @@ char_map = {
 module.exports = slug = (string, opts = {}) ->
     if 'string' is typeof opts
         opts = replacement:opts
-    else if 'boolean' is typeof opts
-        opts = lowerCase:opts
     opts.replacement ?= '-'
     result = ""
-    string = string.toLowerCase() if opts.lowerCase
     for char, i in string
         code = string.charCodeAt(i)
         if char_map[char]
