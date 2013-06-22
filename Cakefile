@@ -12,6 +12,7 @@ task 'build', 'compile coffeescript → javascript', (options) ->
                 compileScript m[0], path.join("lib" ,"#{m[1]}.js"), options
 
 task 'test', "run the tests", (options) ->
+    invoke 'build'
     mocha = [
         "./node_modules/.bin/mocha"
         "./test/*.test.coffee"
