@@ -73,11 +73,14 @@ char_map = {
 }
 
 
-module.exports = slug = (string, replacement = '-', forceLowercase = false) ->
-    if typeof replacement is 'boolean'
-        replacement = '-'
-        forceLowercase = replacement
+module.exports = slug = (string, opts = {}) ->
+    if 'string' is typeof opts
+        opts = replacement:opts
+    else if 'boolean' is typeof opts
+        opts = lowerCase:opts
+    opts.replacement ?= '-'
     result = ""
+    string = string.toLowerCase() if opts.lowerCase
     for char, i in string
         code = string.charCodeAt(i)
         if char_map[char]
@@ -89,10 +92,8 @@ module.exports = slug = (string, replacement = '-', forceLowercase = false) ->
             char = char.replace(word, '') for word in removelist
             char = char.replace(/^\s+|\s+$/g, '')
         char = char.replace(/[^\w\s$\*\_\+~\.\(\)\!\-:@]/g, '') # allowed
-        if forceLowercase
-            char = char.toLowerCase()
         result += char
     result = result.replace(/^\s+|\s+$/g, '') # trim leading/trailing spaces
-    result = result.replace(/[-\s]+/g, replacement) # convert spaces
-    result.replace("#{replacement}$", '') # remove trailing separator
+    result = result.replace(/[-\s]+/g, opts.replacement) # convert spaces
+    result.replace("#{opts.replacement}$", '') # remove trailing separator
 
