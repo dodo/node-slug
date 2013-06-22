@@ -2,21 +2,21 @@ slug = require '../src/slug'
 
 describe 'slug', ->
     it 'should replace whitespaces with replacement', ->
-        slug('foo bar baz').should.eql 'foo-bar-baz'
-        slug('foo bar baz', '_').should.eql 'foo_bar_baz'
+        [slug 'foo bar baz'].should.eql ['foo-bar-baz']
+        [slug 'foo bar baz', '_'].should.eql ['foo_bar_baz']
 
     it 'should remove trailing space if any', ->
-        slug(' foo bar baz ').should.eql 'foo-bar-baz'
+        [slug ' foo bar baz '].should.eql ['foo-bar-baz']
 
     it 'should remove not allowed chars', ->
-        slug('foo, bar baz').should.eql 'foo-bar-baz'
-        slug('foo- bar baz').should.eql 'foo-bar-baz'
-        slug('foo] bar baz').should.eql 'foo-bar-baz'
+        [slug 'foo, bar baz'].should.eql ['foo-bar-baz']
+        [slug 'foo- bar baz'].should.eql ['foo-bar-baz']
+        [slug 'foo] bar baz'].should.eql ['foo-bar-baz']
 
     it 'should leave allowed chars', ->
         allowed = ['*', '+', '~', '.', '(', ')', '\'', '"', '!', ':', '@']
         for a in allowed
-            slug("foo #{a} bar baz").should.eql "foo-#{a}-bar-baz"
+            [slug "foo #{a} bar baz"].should.eql ["foo-#{a}-bar-baz"]
 
     it 'should replace latin chars', ->
         char_map = {
@@ -32,7 +32,7 @@ describe 'slug', ->
             'ý': 'y', 'þ': 'th', 'ÿ': 'y', 'ẞ': 'SS'
         }
         for char, replacement of char_map
-            slug("foo #{char} bar baz").should.eql "foo-#{replacement}-bar-baz"
+            [slug "foo #{char} bar baz"].should.eql ["foo-#{replacement}-bar-baz"]
 
     it 'should replace greek chars', ->
         char_map = {
@@ -48,7 +48,7 @@ describe 'slug', ->
             'Ϋ':'Y'
         }
         for char, replacement of char_map
-            slug("foo #{char} bar baz").should.eql "foo-#{replacement}-bar-baz"
+            [slug "foo #{char} bar baz"].should.eql ["foo-#{replacement}-bar-baz"]
 
     it 'should replace turkish chars', ->
         char_map = {
@@ -56,7 +56,7 @@ describe 'slug', ->
             'ö':'o', 'Ö':'O', 'ğ':'g', 'Ğ':'G'
         }
         for char, replacement of char_map
-            slug("foo #{char} bar baz").should.eql "foo-#{replacement}-bar-baz"
+            [slug "foo #{char} bar baz"].should.eql ["foo-#{replacement}-bar-baz"]
 
     it 'should replace cyrillic chars', ->
         char_map = {
@@ -74,7 +74,7 @@ describe 'slug', ->
         for char, replacement of char_map
             expected = "foo-#{replacement}-bar-baz"
             expected = "foo-bar-baz" if not replacement
-            slug("foo #{char} bar baz").should.eql expected
+            [slug "foo #{char} bar baz"].should.eql [expected]
 
     it 'should replace czech chars', ->
         char_map = {
@@ -83,7 +83,7 @@ describe 'slug', ->
             'Ů':'U', 'Ž':'Z'
         }
         for char, replacement of char_map
-            slug("foo #{char} bar baz").should.eql "foo-#{replacement}-bar-baz"
+            [slug "foo #{char} bar baz"].should.eql ["foo-#{replacement}-bar-baz"]
 
     it 'should replace polish chars', ->
         char_map = {
@@ -92,7 +92,7 @@ describe 'slug', ->
             'Ź':'Z', 'Ż':'Z'
         }
         for char, replacement of char_map
-            slug("foo #{char} bar baz").should.eql "foo-#{replacement}-bar-baz"
+            [slug "foo #{char} bar baz"].should.eql ["foo-#{replacement}-bar-baz"]
 
     it 'should replace latvian chars', ->
         char_map = {
@@ -101,7 +101,7 @@ describe 'slug', ->
             'Ķ':'k', 'Ļ':'L', 'Ņ':'N', 'Š':'S', 'Ū':'u', 'Ž':'Z'
         }
         for char, replacement of char_map
-            slug("foo #{char} bar baz").should.eql "foo-#{replacement}-bar-baz"
+            [slug "foo #{char} bar baz"].should.eql ["foo-#{replacement}-bar-baz"]
 
     it 'should replace currencies', ->
         char_map = {
@@ -115,7 +115,7 @@ describe 'slug', ->
         }
         for char, replacement of char_map
             replacement = replacement.replace ' ', '-'
-            slug("foo #{char} bar baz").should.eql "foo-#{replacement}-bar-baz"
+            [slug "foo #{char} bar baz"].should.eql ["foo-#{replacement}-bar-baz"]
 
     it 'should replace symbols', ->
         char_map = {
@@ -126,8 +126,8 @@ describe 'slug', ->
             '<': 'less', '>': 'greater'
         }
         for char, replacement of char_map
-            slug("foo #{char} bar baz").should.eql "foo-#{replacement}-bar-baz"
+            [slug "foo #{char} bar baz"].should.eql ["foo-#{replacement}-bar-baz"]
 
     it 'should allow forcing lowercase slugs', ->
-        slug('FOO Bar baZ', true).should.eql 'foo-bar-baz'
-        slug('FOO Bar baZ', replacement:'_', lowerCase:true).should.eql 'foo_bar_baz'
+        [slug 'FOO Bar baZ', true].should.eql ['foo-bar-baz']
+        [slug 'FOO Bar baZ', replacement:'_', lowerCase:true].should.eql ['foo_bar_baz']
