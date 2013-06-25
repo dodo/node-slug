@@ -58,7 +58,7 @@ char_map = {
     'Ķ':'k', 'Ļ':'L', 'Ņ':'N', 'Ū':'u'
     # currency
     '€': 'euro', '₢': 'cruzeiro', '₣': 'french franc', '£': 'pound',
-    '₤': 'lira', '₥': 'mill', '₦': 'naira', '₧': 'peseta', '₨': 'rupee',
+    '₤': 'lira', '₥': 'mill', '₦': 'naira', '₧': 'peseta', '₨': 'rupee', '₹': 'indian rupee',
     '₩': 'won', '₪': 'new shequel', '₫': 'dong', '₭': 'kip', '₮': 'tugrik',
     '₯': 'drachma', '₰': 'penny', '₱': 'peso', '₲': 'guarani', '₳': 'austral',
     '₴': 'hryvnia', '₵': 'cedi', '¢': 'cent', '¥': 'yen', '元': 'yuan',
