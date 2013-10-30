@@ -74,6 +74,7 @@ char_map = {
 
 
 module.exports = slug = (string, opts = {}) ->
+    string = string.toString()
     if 'string' is typeof opts
         opts = replacement:opts
     opts.replacement ?= '-'
