@@ -1,6 +1,10 @@
 slug = require '../src/slug'
 
 describe 'slug', ->
+    it 'should convert input to string', ->
+        [slug 1].should.eql ['1']
+        [slug 567890].should.eql ['567890']
+
     it 'should replace whitespaces with replacement', ->
         [slug 'foo bar baz'].should.eql ['foo-bar-baz']
         [slug 'foo bar baz', '_'].should.eql ['foo_bar_baz']
