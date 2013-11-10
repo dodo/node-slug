@@ -123,7 +123,8 @@ if (typeof define !== 'undefined' && define.amd) { // AMD
     symbols(); // preload symbols table
     module.exports = slug;
 } else { // Script tag
-    root.slugg = slug;
+    slug.defaults.symbols = false; // dont load symbols table in the browser
+    root.slug = slug;
 }
 
 }(this));
