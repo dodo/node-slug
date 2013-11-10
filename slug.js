@@ -16,6 +16,7 @@ function slug(string, opts) {
         opts = {replacement:opts};
     opts.replacement = opts.replacement || '-';
     opts.charmap = opts.charmap || slug.charmap;
+    opts.symbols = opts.symbols === false ? false : true;
     var code, unicode, result = "";
     for (var char, i = 0, len = string.length; i < len; i++) { char = string[i];
         if (opts.charmap[char]) {
@@ -24,7 +25,7 @@ function slug(string, opts) {
         } else {
             code = string.charCodeAt(i);
         }
-        if ((unicode = symbols(code))) {
+        if (opts.symbols && (unicode = symbols(code))) {
             char = unicode.name.toLowerCase();
             for(var j = 0, rl = removelist.length; j < rl; j++) {
                 char = char.replace(removelist[j], '');
