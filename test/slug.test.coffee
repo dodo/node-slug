@@ -132,6 +132,22 @@ describe 'slug', ->
         for char, replacement of char_map
             [slug "foo #{char} bar baz"].should.eql ["foo-#{replacement}-bar-baz"]
 
+    it 'should replace unicode', ->
+        char_map = {
+            '☢':"radioactive",'☠':"skull-and-bones",'☤':"caduceus",
+            '☣':"biohazard",'☭':"hammer-and-sickle", '☯':"yin-yang",'☮':"peace",
+            '☏':"telephone",'☔':"umbrella-with-rain-drops",'☎':"telephone",
+            '☀':"sun-with-rays",'★':"star",'☂':"umbrella",'☃':"snowman",
+            '✈':"airplane",'✉':"envelope",'✊':"raised-fist"
+        }
+        for char, replacement of char_map
+            [slug "foo #{char} bar baz"].should.eql ["foo-#{replacement}-bar-baz"]
+
+    it 'should replace no unicode when disabled', ->
+        char_map = '😹☢☠☤☣☭☯☮☏☔☎☀★☂☃✈✉✊'.split ''
+        for char in char_map
+            [slug "foo #{char} bar baz", symbols:no].should.eql ["foo-bar-baz"]
+
     it 'should allow forcing lowercase slugs', ->
         [slug('FOO Bar baZ').toLowerCase()].should.eql ['foo-bar-baz']
         [slug('FOO Bar baZ', replacement:'_').toLowerCase()].should.eql ['foo_bar_baz']
