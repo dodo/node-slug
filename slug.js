@@ -14,9 +14,10 @@ function slug(string, opts) {
     string = string.toString();
     if ('string' === typeof opts)
         opts = {replacement:opts};
-    opts.replacement = opts.replacement || '-';
-    opts.charmap = opts.charmap || slug.charmap;
-    opts.symbols = opts.symbols === false ? false : true;
+    opts.replacement = opts.replacement || slug.defaults.replacement;
+    opts.charmap = opts.charmap || slug.defaults.charmap;
+    if ('undefined' === typeof opts.symbols)
+        opts.symbols = slug.defaults.symbols;
     var code, unicode, result = "";
     for (var char, i = 0, len = string.length; i < len; i++) { char = string[i];
         if (opts.charmap[char]) {
@@ -40,9 +41,14 @@ function slug(string, opts) {
     return result.replace(opts.replacement+"$",''); // remove trailing separator
 };
 
+slug.defaults = {
+    replacement: '-',
+    symbols: true,
+};
+
 
 // https://code.djangoproject.com/browser/django/trunk/django/contrib/admin/media/js/urlify.js
-slug.charmap  = {
+slug.charmap  = slug.defaults.charmap = {
     // latin
     'À': 'A', 'Á': 'A', 'Â': 'A', 'Ã': 'A', 'Ä': 'A', 'Å': 'A', 'Æ': 'AE',
     'Ç': 'C', 'È': 'E', 'É': 'E', 'Ê': 'E', 'Ë': 'E', 'Ì': 'I', 'Í': 'I',
