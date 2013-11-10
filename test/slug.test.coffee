@@ -1,4 +1,4 @@
-slug = require '../src/slug'
+slug = require '../slug'
 
 describe 'slug', ->
     it 'should convert input to string', ->
