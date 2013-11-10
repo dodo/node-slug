@@ -1,8 +1,12 @@
-var symbols = require('unicode/category/So');
-
-var removelist = ['sign', 'cross', 'of', 'symbol', 'staff']
-    .map(function (word) {return new RegExp(word, 'gi')});
-
+// lazy require symbols table
+var _symbols, removelist;
+function symbols(code) {
+    if (_symbols) return _symbols[code];
+    _symbols = require('unicode/category/So');
+    removelist = ['sign', 'cross', 'of', 'symbol', 'staff']
+        .map(function (word) {return new RegExp(word, 'gi')});
+    return _symbols[code];
+}
 
 function slug(string, opts) {
     opts = opts || {};
@@ -19,7 +23,7 @@ function slug(string, opts) {
         } else {
             code = string.charCodeAt(i);
         }
-        if ((unicode = symbols[code])) {
+        if ((unicode = symbols(code))) {
             char = unicode.name.toLowerCase();
             for(var j = 0, rl = removelist.length; j < rl; j++) {
                 char = char.replace(removelist[j], '');
