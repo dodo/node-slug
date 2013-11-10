@@ -1,3 +1,4 @@
+(function (root) {
 // lazy require symbols table
 var _symbols, removelist;
 function symbols(code) {
@@ -107,6 +108,14 @@ slug.charmap  = {
     '<': 'less', '>': 'greater',
 };
 
-// exports
+// Be compatible with different module systems
 
-module.exports = slug;
+if (typeof define !== 'undefined' && define.amd) { // AMD
+    define([], function () {return slug});
+} else if (typeof module !== 'undefined' && module.exports) { // CommonJS
+    module.exports = slug;
+} else { // Script tag
+    root.slugg = slug;
+}
+
+}(this));
