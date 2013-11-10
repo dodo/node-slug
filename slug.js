@@ -10,7 +10,7 @@ function slug(string, opts) {
     if ('string' === typeof opts)
         opts = {replacement:opts};
     opts.replacement = opts.replacement || '-';
-    opts.charmap = opts.charmap || char_map;
+    opts.charmap = opts.charmap || slug.charmap;
     var code, unicode, result = "";
     for (var char, i = 0, len = string.length; i < len; i++) { char = string[i];
         if (opts.charmap[char]) {
@@ -36,7 +36,7 @@ function slug(string, opts) {
 
 
 // https://code.djangoproject.com/browser/django/trunk/django/contrib/admin/media/js/urlify.js
-var char_map = slug.charmap  = {
+slug.charmap  = {
     // latin
     'À': 'A', 'Á': 'A', 'Â': 'A', 'Ã': 'A', 'Ä': 'A', 'Å': 'A', 'Æ': 'AE',
     'Ç': 'C', 'È': 'E', 'É': 'E', 'Ê': 'E', 'Ë': 'E', 'Ì': 'I', 'Í': 'I',
