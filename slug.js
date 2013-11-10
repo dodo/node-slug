@@ -4,7 +4,7 @@ var removelist = ['sign', 'cross', 'of', 'symbol', 'staff']
     .map(function (word) {return new RegExp(word, 'gi')});
 
 
-module.exports = function slug(string, opts) {
+function slug(string, opts) {
     opts = opts || {};
     string = string.toString();
     if ('string' === typeof opts)
@@ -36,7 +36,7 @@ module.exports = function slug(string, opts) {
 
 
 // https://code.djangoproject.com/browser/django/trunk/django/contrib/admin/media/js/urlify.js
-var char_map = module.exports.charmap  = {
+var char_map = slug.charmap  = {
     // latin
     'À': 'A', 'Á': 'A', 'Â': 'A', 'Ã': 'A', 'Ä': 'A', 'Å': 'A', 'Æ': 'AE',
     'Ç': 'C', 'È': 'E', 'É': 'E', 'Ê': 'E', 'Ë': 'E', 'Ì': 'I', 'Í': 'I',
@@ -103,3 +103,6 @@ var char_map = module.exports.charmap  = {
     '<': 'less', '>': 'greater',
 };
 
+// exports
+
+module.exports = slug;
