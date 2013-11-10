@@ -113,6 +113,7 @@ slug.charmap  = {
 if (typeof define !== 'undefined' && define.amd) { // AMD
     define([], function () {return slug});
 } else if (typeof module !== 'undefined' && module.exports) { // CommonJS
+    symbols(); // preload symbols table
     module.exports = slug;
 } else { // Script tag
     root.slugg = slug;
