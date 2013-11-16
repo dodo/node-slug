@@ -8,7 +8,7 @@ Make strings url-safe.
 - No dependencies
 - Not in coffee-script (except the tests lol)
 - Coerces foreign symbols to their english equivalent
-- Works in browser (window.slug) and AMD/CommonJS-flavoured module loaders
+- Works in browser (window.slug) and AMD/CommonJS-flavoured module loaders (except the unicode symbols unless you use browserify but who wants to download a 7mb js file, right?)
 
 ```
 npm install slug
