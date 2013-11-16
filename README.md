@@ -1,4 +1,4 @@
-# slugify string
+# [slug](https://github.com/dodo/node-slug)
 
 slugifies every string, even when it contains unicode!
 Make strings url-safe.
