@@ -1,6 +1,17 @@
 # slugify string
 
 slugifies every string, even when it contains unicode!
+Make strings url-safe.
+
+- Comprehensive tests
+- No dependencies
+- Not in coffee-script (lol)
+- Coerces foreign symbols to their english equivalent
+- Works in browser (window.slug) and AMD/CommonJS-flavoured module loaders
+
+```
+npm install slug
+```
 
 ## example
 
@@ -17,6 +28,11 @@ master//node-slug » node
 ```
 
 ## options
+
+```javascript
+// options is either object or replacement (sets options.replacement)
+slug('string', [{options} || 'replacement']);
+```
 
 ```javascript
 slug.defaults = {
