@@ -5,7 +5,7 @@ Make strings url-safe.
 
 - Comprehensive tests
 - No dependencies
-- Not in coffee-script (lol)
+- Not in coffee-script (except the tests lol)
 - Coerces foreign symbols to their english equivalent
 - Works in browser (window.slug) and AMD/CommonJS-flavoured module loaders
 
