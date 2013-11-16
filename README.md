@@ -25,6 +25,8 @@ master//node-slug » node
 > slug.charmap['♥'] = 'freaking love' # change default charmap or use option {charmap:{…}} as 2. argument
 > slug('I ♥ UNICODE').toLowerCase() # If you prefer lower case
  'i-freaking-love-unicode'
+> slug('unicode ♥ is ☢')
+ 'unicode-love-is-radioactive'
 ```
 
 ## options
