@@ -16,4 +16,14 @@ master//node-slug » node
  'i-freaking-love-unicode'
 ```
 
+## options
+
+```javascript
+slug.defaults = {
+    replacement: '-',      // replace spaces with replacement
+    symbols: true,         // replace unicode symbols or not
+    charmap: slug.charmap, // replace special characters
+};
+```
+
 [![Build Status](https://secure.travis-ci.org/dodo/node-slug.png)](http://travis-ci.org/dodo/node-slug)
