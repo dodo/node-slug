@@ -15,4 +15,7 @@
     "mocha": "0.3.3",
     "should": "0.3.2",
     "coffee-script": ">= 1.1.2"}
+, "licenses" : [
+    { "type": "MIT" ,
+      "url": "http://github.com/dodo/node-slug/raw/master/LICENSE"} ]
 }
