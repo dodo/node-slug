@@ -8,13 +8,13 @@
 , "engines": {"node": ">= 0.4.x"}
 , "keywords": ["slugify", "slug", "string", "utf8", "utf-8", "unicode", "url"]
 , "scripts": {
-    "test": "./node_modules/.bin/mocha ./test/*.test.* --require should --reporter spec --colors"}
+    "test": "./node_modules/.bin/mocha ./test/*.test.* --require should --reporter spec --colors --compilers coffee:coffee-script/register"}
 , "dependencies": {
     "unicode": ">= 0.3.1"}
 , "devDependencies": {
-    "mocha": "0.3.3",
-    "should": "0.3.2",
-    "coffee-script": ">= 1.1.2"}
+    "mocha": "~1.17.1",
+    "should": "~3.1.2",
+    "coffee-script": "~1.7.1"}
 , "licenses" : [
     { "type": "MIT" ,
       "url": "http://github.com/dodo/node-slug/raw/master/LICENSE"} ]
