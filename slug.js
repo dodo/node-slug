@@ -112,7 +112,7 @@ slug.charmap  = slug.defaults.charmap = {
     '“': '"', '”': '"', '‘': "'", '’': "'", '∂': 'd', 'ƒ': 'f', '™': 'tm',
     '℠': 'sm', '…': '...', '˚': 'o', 'º': 'o', 'ª': 'a', '•': '*',
     '∆': 'delta', '∞': 'infinity', '♥': 'love', '&': 'and', '|': 'or',
-    '<': 'less', '>': 'greater',
+    '<': 'less', '>': 'greater','!':' '
 };
 
 // Be compatible with different module systems
