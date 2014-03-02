@@ -18,7 +18,7 @@ npm install slug
 
 ```javascript
 var slug = require('slug')
-var print console.log.bind(console, '>')
+var print = console.log.bind(console, '>')
 
 print(slug('i ♥ unicode'))
 // > i-love-unicode
