@@ -38,6 +38,7 @@ function slug(string, opts) {
     }
     result = result.replace(/^\s+|\s+$/g, ''); // trim leading/trailing spaces
     result = result.replace(/[-\s]+/g, opts.replacement); // convert spaces
+    result = result.toLowerCase(); //keep it lowercase
     return result.replace(opts.replacement+"$",''); // remove trailing separator
 };
 
@@ -112,7 +113,7 @@ slug.charmap  = slug.defaults.charmap = {
     '“': '"', '”': '"', '‘': "'", '’': "'", '∂': 'd', 'ƒ': 'f', '™': 'tm',
     '℠': 'sm', '…': '...', '˚': 'o', 'º': 'o', 'ª': 'a', '•': '*',
     '∆': 'delta', '∞': 'infinity', '♥': 'love', '&': 'and', '|': 'or',
-    '<': 'less', '>': 'greater',
+    '<': 'less', '>': 'greater','!':' '
 };
 
 // Be compatible with different module systems
