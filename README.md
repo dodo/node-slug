@@ -4,6 +4,7 @@ slugifies every string, even when it contains unicode!
 
 Make strings url-safe.
 
+- respecting [RFC 3986](https://tools.ietf.org/html/rfc3986)
 - Comprehensive tests
 - No dependencies (except the unicode table)
 - Not in coffee-script (except the tests lol)
