@@ -18,7 +18,7 @@ describe 'slug', ->
         [slug 'foo] bar baz'].should.eql ['foo-bar-baz']
 
     it 'should leave allowed chars', ->
-        allowed = ['*', '+', '~', '.', '(', ')', "'", '"', '!', ':', '@']
+        allowed = ['.', '_', '~']
         for a in allowed
             [slug "foo #{a} bar baz"].should.eql ["foo-#{a}-bar-baz"]
 
@@ -123,14 +123,21 @@ describe 'slug', ->
 
     it 'should replace symbols', ->
         char_map = {
-            '©':'(c)', 'œ': 'oe', 'Œ': 'OE', '∑': 'sum', '®': '(r)', '†': '+',
-            '“': '"', '”': '"', '‘': "'", '’': "'", '∂': 'd', 'ƒ': 'f', '™': 'tm',
-            '℠': 'sm', '…': '...', '˚': 'o', 'º': 'o', 'ª': 'a', '•': '*',
+            '©':'c', 'œ': 'oe', 'Œ': 'OE', '∑': 'sum', '®': 'r',
+            '∂': 'd', 'ƒ': 'f', '™': 'tm',
+            '℠': 'sm', '…': '...', '˚': 'o', 'º': 'o', 'ª': 'a'
             '∆': 'delta', '∞': 'infinity', '♥': 'love', '&': 'and', '|': 'or',
             '<': 'less', '>': 'greater'
         }
         for char, replacement of char_map
             [slug "foo #{char} bar baz"].should.eql ["foo-#{replacement}-bar-baz"]
+
+    it 'should strip symbols', ->
+        char_map = [
+            '†', '“', '”', '‘', '’', '•'
+        ]
+        for char in char_map
+            [slug "foo #{char} bar baz"].should.eql ["foo-bar-baz"]
 
     it 'should replace unicode', ->
         char_map = {
