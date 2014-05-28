@@ -92,7 +92,7 @@ describe 'slug', ->
     it 'should replace polish chars', ->
         char_map = {
             'ą':'a', 'ć':'c', 'ę':'e', 'ł':'l', 'ń':'n', 'ó':'o', 'ś':'s', 'ź':'z',
-            'ż':'z', 'Ą':'A', 'Ć':'C', 'Ę':'e', 'Ł':'L', 'Ń':'N', 'Ś':'S',
+            'ż':'z', 'Ą':'A', 'Ć':'C', 'Ę':'E', 'Ł':'L', 'Ń':'N', 'Ś':'S',
             'Ź':'Z', 'Ż':'Z'
         }
         for char, replacement of char_map
@@ -101,8 +101,8 @@ describe 'slug', ->
     it 'should replace latvian chars', ->
         char_map = {
             'ā':'a', 'č':'c', 'ē':'e', 'ģ':'g', 'ī':'i', 'ķ':'k', 'ļ':'l', 'ņ':'n',
-            'š':'s', 'ū':'u', 'ž':'z', 'Ā':'A', 'Č':'C', 'Ē':'E', 'Ģ':'G', 'Ī':'i',
-            'Ķ':'k', 'Ļ':'L', 'Ņ':'N', 'Š':'S', 'Ū':'u', 'Ž':'Z'
+            'š':'s', 'ū':'u', 'ž':'z', 'Ā':'A', 'Č':'C', 'Ē':'E', 'Ģ':'G', 'Ī':'I',
+            'Ķ':'K', 'Ļ':'L', 'Ņ':'N', 'Š':'S', 'Ū':'U', 'Ž':'Z'
         }
         for char, replacement of char_map
             [slug "foo #{char} bar baz"].should.eql ["foo-#{replacement}-bar-baz"]
@@ -164,3 +164,6 @@ describe 'slug', ->
             'f': 'ph', 'o':'0', 'b':'8', 'a':'4', 'r':'2', 'z':'5'
         }
         [slug("foo bar baz", {charmap}).toUpperCase()].should.eql ['PH00-842-845']
+
+    it 'should replace lithuanian characters', ->
+        slug('ąčęėįšųūžĄČĘĖĮŠŲŪŽ').should.eql 'aceeisuuzACEEISUUZ'
