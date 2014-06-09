@@ -99,6 +99,8 @@ slug.charmap  = slug.defaults.charmap = {
     'ā':'a', 'ē':'e', 'ģ':'g', 'ī':'i', 'ķ':'k', 'ļ':'l', 'ņ':'n',
     'ū':'u', 'Ā':'A', 'Ē':'E', 'Ģ':'G', 'Ī':'i',
     'Ķ':'k', 'Ļ':'L', 'Ņ':'N', 'Ū':'u',
+    // romanian
+    'ț':'t', 'Ț':'T', 'ţ':'t', 'Ţ':'T', 'ș':'s', 'Ș':'S', 'ă':'a', 'Ă':'A',
     // currency
     '€': 'euro', '₢': 'cruzeiro', '₣': 'french franc', '£': 'pound',
     '₤': 'lira', '₥': 'mill', '₦': 'naira', '₧': 'peseta', '₨': 'rupee',
