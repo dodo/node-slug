@@ -122,6 +122,7 @@ slug.charmap  = slug.defaults.charmap = {
 // Be compatible with different module systems
 
 if (typeof define !== 'undefined' && define.amd) { // AMD
+    slug.defaults.symbols = false; // dont load symbols table in the browser
     define([], function () {return slug});
 } else if (typeof module !== 'undefined' && module.exports) { // CommonJS
     symbols(); // preload symbols table
