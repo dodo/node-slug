@@ -15,23 +15,39 @@ function slug(string, opts) {
     if ('string' === typeof opts)
         opts = {replacement:opts};
     opts.replacement = opts.replacement || slug.defaults.replacement;
+    opts.multicharmap = opts.multicharmap || slug.defaults.multicharmap;
     opts.charmap = opts.charmap || slug.defaults.charmap;
     if ('undefined' === typeof opts.symbols)
         opts.symbols = slug.defaults.symbols;
+    var lengths = [];
+    Object.keys(opts.multicharmap).forEach(function (key) {
+        var len = key.length;
+        if (lengths.indexOf(len) === -1)
+            lengths.push(len);
+    });
     var code, unicode, result = "";
-    for (var char, i = 0, len = string.length; i < len; i++) { char = string[i];
-        if (opts.charmap[char]) {
-            char = opts.charmap[char];
-            code = char.charCodeAt(0);
-        } else {
-            code = string.charCodeAt(i);
-        }
-        if (opts.symbols && (unicode = symbols(code))) {
-            char = unicode.name.toLowerCase();
-            for(var j = 0, rl = removelist.length; j < rl; j++) {
-                char = char.replace(removelist[j], '');
+    for (var char, i = 0, l = string.length; i < l; i++) { char = string[i];
+        if (!lengths.some(function (len) {
+            var str = string.substr(i, len);
+            if (opts.multicharmap[str]) {
+                i += len - 1;
+                char = opts.multicharmap[str];
+                return true;
+            } else return false;
+        })) {
+            if (opts.charmap[char]) {
+                char = opts.charmap[char];
+                code = char.charCodeAt(0);
+            } else {
+                code = string.charCodeAt(i);
             }
-            char = char.replace(/^\s+|\s+$/g, '');
+            if (opts.symbols && (unicode = symbols(code))) {
+                char = unicode.name.toLowerCase();
+                for(var j = 0, rl = removelist.length; j < rl; j++) {
+                    char = char.replace(removelist[j], '');
+                }
+                char = char.replace(/^\s+|\s+$/g, '');
+            }
         }
         char = char.replace(/[^\w\s\-\.\_~]/g, ''); // allowed
         result += char;
@@ -46,6 +62,9 @@ slug.defaults = {
     symbols: true,
 };
 
+slug.multicharmap = slug.defaults.multicharmap = {
+    '<3': 'love', '&&': 'and', '||': 'or', 'w/': 'with',
+};
 
 // https://code.djangoproject.com/browser/django/trunk/django/contrib/admin/media/js/urlify.js
 slug.charmap  = slug.defaults.charmap = {
