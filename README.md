@@ -37,6 +37,9 @@ print(slug('i ♥ unicode', '_')) // If you prefer something else then `-` as se
 slug.charmap['♥'] = 'freaking love' // change default charmap or use option {charmap:{…}} as 2. argument
 print(slug('I ♥ UNICODE').toLowerCase()) // If you prefer lower case
 // > i-freaking-love-unicode
+
+print(slug('i <3 unicode'))
+// > i-love-unicode
 ```
 
 ## options
@@ -50,7 +53,9 @@ slug('string', [{options} || 'replacement']);
 slug.defaults = {
     replacement: '-',      // replace spaces with replacement
     symbols: true,         // replace unicode symbols or not
+    remove: null,          // (optional) regex to remove characters
     charmap: slug.charmap, // replace special characters
+    multicharmap: slug.multicharmap // replace multi-characters
 };
 ```
 
