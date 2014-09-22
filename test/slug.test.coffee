@@ -167,3 +167,6 @@ describe 'slug', ->
 
     it 'should replace lithuanian characters', ->
         slug('ąčęėįšųūžĄČĘĖĮŠŲŪŽ').should.eql 'aceeisuuzACEEISUUZ'
+
+    it 'should replace multichars', ->
+        [slug "w/ <3 && sugar || ☠"].should.eql ['with-love-and-sugar-or-skull-and-bones']
