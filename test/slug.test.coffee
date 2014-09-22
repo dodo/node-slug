@@ -170,3 +170,9 @@ describe 'slug', ->
 
     it 'should replace multichars', ->
         [slug "w/ <3 && sugar || ☠"].should.eql ['with-love-and-sugar-or-skull-and-bones']
+
+    it 'should be flavourable', ->
+        remove = /[.'"]/g
+        text = "It's your journey ... we guide you through."
+        expected = "Its-your-journey-we-guide-you-through"
+        [slug(text, {remove})].should.eql [expected]
