@@ -17,6 +17,7 @@ function slug(string, opts) {
     opts.replacement = opts.replacement || slug.defaults.replacement;
     opts.multicharmap = opts.multicharmap || slug.defaults.multicharmap;
     opts.charmap = opts.charmap || slug.defaults.charmap;
+    opts.remove = opts.remove || slug.defaults.remove;
     if ('undefined' === typeof opts.symbols)
         opts.symbols = slug.defaults.symbols;
     var lengths = [];
@@ -50,6 +51,7 @@ function slug(string, opts) {
             }
         }
         char = char.replace(/[^\w\s\-\.\_~]/g, ''); // allowed
+        if (opts.remove) char = char.replace(opts.remove, ''); // add flavour
         result += char;
     }
     result = result.replace(/^\s+|\s+$/g, ''); // trim leading/trailing spaces
@@ -60,6 +62,7 @@ function slug(string, opts) {
 slug.defaults = {
     replacement: '-',
     symbols: true,
+    remove: null,
 };
 
 slug.multicharmap = slug.defaults.multicharmap = {
