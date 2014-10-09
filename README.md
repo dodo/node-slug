@@ -50,7 +50,7 @@ slug('string', [{options} || 'replacement']);
 ```
 
 ```javascript
-slug.defaults.mode ='rfc3986';
+slug.defaults.mode ='pretty';
 slug.defaults.modes['rfc3986'] = {
     replacement: '-',      // replace spaces with replacement
     symbols: true,         // replace unicode symbols or not
