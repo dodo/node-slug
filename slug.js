@@ -14,12 +14,13 @@ function slug(string, opts) {
     string = string.toString();
     if ('string' === typeof opts)
         opts = {replacement:opts};
-    opts.replacement = opts.replacement || slug.defaults.replacement;
-    opts.multicharmap = opts.multicharmap || slug.defaults.multicharmap;
-    opts.charmap = opts.charmap || slug.defaults.charmap;
-    opts.remove = opts.remove || slug.defaults.remove;
+    opts.mode = opts.mode || slug.defaults.mode;
+    var defaults = slug.defaults.modes[opts.mode];
+    ['replacement','multicharmap','charmap','remove'].forEach(function (key) {
+        opts[key] = opts[key] || defaults[key];
+    });
     if ('undefined' === typeof opts.symbols)
-        opts.symbols = slug.defaults.symbols;
+        opts.symbols = defaults.symbols;
     var lengths = [];
     Object.keys(opts.multicharmap).forEach(function (key) {
         var len = key.length;
@@ -60,9 +61,7 @@ function slug(string, opts) {
 };
 
 slug.defaults = {
-    replacement: '-',
-    symbols: true,
-    remove: null,
+    mode: 'rfc3986',
 };
 
 slug.multicharmap = slug.defaults.multicharmap = {
@@ -141,16 +140,39 @@ slug.charmap  = slug.defaults.charmap = {
     '<': 'less', '>': 'greater',
 };
 
+slug.defaults.modes = {
+    rfc3986: {
+        replacement: '-',
+        symbols: true,
+        remove: null,
+        charmap: slug.defaults.charmap,
+        multicharmap: slug.defaults.multicharmap,
+    },
+    pretty: {
+        replacement: '-',
+        symbols: true,
+        remove: /[.]/g,
+        charmap: slug.defaults.charmap,
+        multicharmap: slug.defaults.multicharmap,
+    },
+};
+
 // Be compatible with different module systems
 
 if (typeof define !== 'undefined' && define.amd) { // AMD
-    slug.defaults.symbols = false; // dont load symbols table in the browser
+    // dont load symbols table in the browser
+    Object.keys(slug.defaults.modes).forEach(function (key) {
+        slug.defaults.modes[key].symbols = false;
+    });
     define([], function () {return slug});
 } else if (typeof module !== 'undefined' && module.exports) { // CommonJS
     symbols(); // preload symbols table
     module.exports = slug;
 } else { // Script tag
-    slug.defaults.symbols = false; // dont load symbols table in the browser
+    // dont load symbols table in the browser
+    Object.keys(slug.defaults.modes).forEach(function (key) {
+        slug.defaults.modes[key].symbols = false;
+    });
     root.slug = slug;
 }
 
