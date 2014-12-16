@@ -10,14 +10,15 @@ function symbols(code) {
 }
 
 function slug(string, opts) {
-    opts = opts || {};
     string = string.toString();
     if ('string' === typeof opts)
         opts = {replacement:opts};
+    opts = opts || {};
     opts.mode = opts.mode || slug.defaults.mode;
     var defaults = slug.defaults.modes[opts.mode];
     ['replacement','multicharmap','charmap','remove'].forEach(function (key) {
-        opts[key] = opts[key] || defaults[key];
+        if ('replacement' !== key || 'string' !== typeof opts[key])
+            opts[key] =  opts[key] || defaults[key];
     });
     if ('undefined' === typeof opts.symbols)
         opts.symbols = defaults.symbols;
