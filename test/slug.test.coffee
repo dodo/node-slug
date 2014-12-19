@@ -8,6 +8,7 @@ describe 'slug', ->
     it 'should replace whitespaces with replacement', ->
         [slug 'foo bar baz'].should.eql ['foo-bar-baz']
         [slug 'foo bar baz', '_'].should.eql ['foo_bar_baz']
+        [slug 'foo bar baz', ''].should.eql ['foobarbaz']
 
     it 'should remove trailing space if any', ->
         [slug ' foo bar baz '].should.eql ['foo-bar-baz']
