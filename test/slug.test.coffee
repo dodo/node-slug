@@ -17,10 +17,11 @@ describe 'slug', ->
         [slug 'foo- bar baz'].should.eql ['foo-bar-baz']
         [slug 'foo] bar baz'].should.eql ['foo-bar-baz']
 
-    it 'should leave allowed chars', ->
+    it 'should leave allowed chars in rfc3986 mode', ->
         allowed = ['.', '_', '~']
         for a in allowed
-            [slug "foo #{a} bar baz"].should.eql ["foo-#{a}-bar-baz"]
+            [slug "foo #{a} bar baz",
+                mode: "rfc3986"].should.eql ["foo-#{a}-bar-baz"]
 
     it 'should replace latin chars', ->
         char_map = {
@@ -121,7 +122,7 @@ describe 'slug', ->
             replacement = replacement.replace ' ', '-'
             [slug "foo #{char} bar baz"].should.eql ["foo-#{replacement}-bar-baz"]
 
-    it 'should replace symbols', ->
+    it 'should replace symbols in rfc3986 mode', ->
         char_map = {
             '©':'c', 'œ': 'oe', 'Œ': 'OE', '∑': 'sum', '®': 'r',
             '∂': 'd', 'ƒ': 'f', '™': 'tm',
@@ -130,7 +131,26 @@ describe 'slug', ->
             '<': 'less', '>': 'greater'
         }
         for char, replacement of char_map
+            [slug "foo #{char} bar baz",
+                mode: "rfc3986"].should.eql ["foo-#{replacement}-bar-baz"]
+
+    it 'should replace symbols in pretty mode', ->
+        char_map = {
+            '©':'c', 'œ': 'oe', 'Œ': 'OE', '∑': 'sum', '®': 'r',
+            '∂': 'd', 'ƒ': 'f', '™': 'tm',
+            '℠': 'sm', '˚': 'o', 'º': 'o', 'ª': 'a'
+            '∆': 'delta', '∞': 'infinity', '♥': 'love', '&': 'and', '|': 'or',
+            '<': 'less', '>': 'greater'
+        }
+        for char, replacement of char_map
             [slug "foo #{char} bar baz"].should.eql ["foo-#{replacement}-bar-baz"]
+
+    it 'should remove ellipsis in pretty mode', ->
+        char_map = {
+            '…': '...'
+        }
+        for char, replacement of char_map
+            [slug "foo #{char} bar baz"].should.eql ["foo-bar-baz"]
 
     it 'should strip symbols', ->
         char_map = [
