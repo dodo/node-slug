@@ -17,8 +17,15 @@ describe 'slug', ->
         [slug 'foo- bar baz'].should.eql ['foo-bar-baz']
         [slug 'foo] bar baz'].should.eql ['foo-bar-baz']
 
-    it 'should leave allowed chars', ->
+    it 'should leave allowed chars in rfc3986 mode', ->
+        slug.defaults.mode = 'rfc3986'
         allowed = ['.', '_', '~']
+        for a in allowed
+            [slug "foo #{a} bar baz"].should.eql ["foo-#{a}-bar-baz"]
+        slug.defaults.mode = 'pretty'
+    
+    it 'should leave allowed chars in pretty mode', ->
+        allowed = ['_', '~']
         for a in allowed
             [slug "foo #{a} bar baz"].should.eql ["foo-#{a}-bar-baz"]
 
@@ -121,7 +128,9 @@ describe 'slug', ->
             replacement = replacement.replace ' ', '-'
             [slug "foo #{char} bar baz"].should.eql ["foo-#{replacement}-bar-baz"]
 
+    
     it 'should replace symbols', ->
+        slug.defaults.mode = 'rfc3986'
         char_map = {
             '©':'c', 'œ': 'oe', 'Œ': 'OE', '∑': 'sum', '®': 'r',
             '∂': 'd', 'ƒ': 'f', '™': 'tm',
@@ -131,7 +140,11 @@ describe 'slug', ->
         }
         for char, replacement of char_map
             [slug "foo #{char} bar baz"].should.eql ["foo-#{replacement}-bar-baz"]
-
+        slug.defaults.mode = 'pretty'
+    
+    it 'should strip … symbols in pretty mode', ->
+        [slug "foo … bar baz"].should.eql ["foo-bar-baz"]
+    
     it 'should strip symbols', ->
         char_map = [
             '†', '“', '”', '‘', '’', '•'
