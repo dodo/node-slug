@@ -16,17 +16,23 @@ function slug(string, opts) {
     opts = opts || {};
     opts.mode = opts.mode || slug.defaults.mode;
     var defaults = slug.defaults.modes[opts.mode];
-    ['replacement','multicharmap','charmap','remove','lower'].forEach(function (key) {
+    var keys = ['replacement','multicharmap','charmap','remove','lower'];
+    for (var key, i = 0, l = keys.length; i < l; i++) { key = keys[i];
         opts[key] = (key in opts) ? opts[key] : defaults[key];
-    });
+    }
     if ('undefined' === typeof opts.symbols)
         opts.symbols = defaults.symbols;
+
     var lengths = [];
-    Object.keys(opts.multicharmap).forEach(function (key) {
+    for (var key in opts.multicharmap) {
+        if (!opts.multicharmap.hasOwnProperty(key))
+            continue;
+
         var len = key.length;
         if (lengths.indexOf(len) === -1)
             lengths.push(len);
-    });
+    }
+
     var code, unicode, result = "";
     for (var char, i = 0, l = string.length; i < l; i++) { char = string[i];
         if (!lengths.some(function (len) {
@@ -182,18 +188,24 @@ slug.defaults.modes = {
 
 if (typeof define !== 'undefined' && define.amd) { // AMD
     // dont load symbols table in the browser
-    Object.keys(slug.defaults.modes).forEach(function (key) {
+    for (var key in slug.defaults.modes) {
+        if (!slug.defaults.modes.hasOwnProperty(key))
+            continue;
+
         slug.defaults.modes[key].symbols = false;
-    });
+    }
     define([], function () {return slug});
 } else if (typeof module !== 'undefined' && module.exports) { // CommonJS
     symbols(); // preload symbols table
     module.exports = slug;
 } else { // Script tag
     // dont load symbols table in the browser
-    Object.keys(slug.defaults.modes).forEach(function (key) {
+    for (var key in slug.defaults.modes) {
+        if (!slug.defaults.modes.hasOwnProperty(key))
+            continue;
+
         slug.defaults.modes[key].symbols = false;
-    });
+    }
     root.slug = slug;
 }
 
