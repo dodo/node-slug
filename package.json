@@ -1,6 +1,6 @@
 { "name": "slug"
 , "description": "slugifies even utf-8 chars!"
-, "version": "0.9.0"
+, "version": "0.9.1"
 , "homepage": "https://github.com/dodo/node-slug"
 , "author": "dodo (https://github.com/dodo)"
 , "repository": {"type": "git", "url": "git://github.com/dodo/node-slug.git"}
