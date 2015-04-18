@@ -15,11 +15,9 @@ function slug(string, opts) {
         opts = {replacement:opts};
     opts = opts || {};
     opts.mode = opts.mode || slug.defaults.mode;
-    opts.lowercase = opts.lowercase === false? false : slug.defaults.lowercase;
     var defaults = slug.defaults.modes[opts.mode];
-    ['replacement','multicharmap','charmap','remove'].forEach(function (key) {
-        if ('replacement' !== key || 'string' !== typeof opts[key])
-            opts[key] =  opts[key] || defaults[key];
+    ['replacement','multicharmap','charmap','remove','lower'].forEach(function (key) {
+        opts[key] = (key in opts) ? opts[key] : defaults[key];
     });
     if ('undefined' === typeof opts.symbols)
         opts.symbols = defaults.symbols;
@@ -60,15 +58,13 @@ function slug(string, opts) {
     result = result.replace(/^\s+|\s+$/g, ''); // trim leading/trailing spaces
     result = result.replace(/[-\s]+/g, opts.replacement); // convert spaces
     result = result.replace(opts.replacement+"$",''); // remove trailing separator
-    if (opts.lowercase) {
-      result = result.toLowerCase()
-    }
+    if (opts.lower)
+      result = result.toLowerCase();
     return result;
 };
 
 slug.defaults = {
     mode: 'pretty',
-    lowercase: true
 };
 
 slug.multicharmap = slug.defaults.multicharmap = {
@@ -168,6 +164,7 @@ slug.defaults.modes = {
         replacement: '-',
         symbols: true,
         remove: null,
+        lower: true,
         charmap: slug.defaults.charmap,
         multicharmap: slug.defaults.multicharmap,
     },
@@ -175,6 +172,7 @@ slug.defaults.modes = {
         replacement: '-',
         symbols: true,
         remove: /[.]/g,
+        lower: false,
         charmap: slug.defaults.charmap,
         multicharmap: slug.defaults.multicharmap,
     },
