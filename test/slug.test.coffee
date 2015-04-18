@@ -24,6 +24,11 @@ describe 'slug', ->
             [slug "foo #{a} bar baz",
                 mode: "rfc3986"].should.eql ["foo-#{a}-bar-baz"]
 
+    it 'should leave allowed chars in pretty mode', ->
+        allowed = ['_', '~']
+        for a in allowed
+            [slug "foo #{a} bar baz"].should.eql ["foo-#{a}-bar-baz"]
+
     it 'should replace latin chars', ->
         char_map = {
             'À': 'A', 'Á': 'A', 'Â': 'A', 'Ã': 'A', 'Ä': 'A', 'Å': 'A', 'Æ': 'AE',
@@ -152,6 +157,9 @@ describe 'slug', ->
         }
         for char, replacement of char_map
             [slug "foo #{char} bar baz"].should.eql ["foo-bar-baz"]
+
+    it 'should strip … symbols in pretty mode', ->
+        [slug "foo … bar baz"].should.eql ["foo-bar-baz"]
 
     it 'should strip symbols', ->
         char_map = [
