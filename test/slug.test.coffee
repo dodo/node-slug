@@ -43,7 +43,7 @@ describe 'slug', ->
             'ý': 'y', 'þ': 'th', 'ÿ': 'y', 'ẞ': 'SS'
         }
         for char, replacement of char_map
-            [slug "foo #{char} bar baz"].should.eql ["foo-#{replacement}-bar-baz"]
+            [slug "foo #{char} bar baz"].should.eql ["foo-#{replacement}-bar-baz".toLowerCase()]
 
     it 'should replace greek chars', ->
         char_map = {
@@ -59,7 +59,7 @@ describe 'slug', ->
             'Ϋ':'Y'
         }
         for char, replacement of char_map
-            [slug "foo #{char} bar baz"].should.eql ["foo-#{replacement}-bar-baz"]
+            [slug "foo #{char} bar baz"].should.eql ["foo-#{replacement}-bar-baz".toLowerCase()]
 
     it 'should replace turkish chars', ->
         char_map = {
@@ -67,7 +67,7 @@ describe 'slug', ->
             'ö':'o', 'Ö':'O', 'ğ':'g', 'Ğ':'G'
         }
         for char, replacement of char_map
-            [slug "foo #{char} bar baz"].should.eql ["foo-#{replacement}-bar-baz"]
+            [slug "foo #{char} bar baz"].should.eql ["foo-#{replacement}-bar-baz".toLowerCase()]
 
     it 'should replace cyrillic chars', ->
         char_map = {
@@ -85,7 +85,7 @@ describe 'slug', ->
         for char, replacement of char_map
             expected = "foo-#{replacement}-bar-baz"
             expected = "foo-bar-baz" if not replacement
-            [slug "foo #{char} bar baz"].should.eql [expected]
+            [slug "foo #{char} bar baz"].should.eql [expected.toLowerCase()]
 
     it 'should replace czech chars', ->
         char_map = {
@@ -94,7 +94,7 @@ describe 'slug', ->
             'Ů':'U', 'Ž':'Z'
         }
         for char, replacement of char_map
-            [slug "foo #{char} bar baz"].should.eql ["foo-#{replacement}-bar-baz"]
+            [slug "foo #{char} bar baz"].should.eql ["foo-#{replacement}-bar-baz".toLowerCase()]
 
     it 'should replace polish chars', ->
         char_map = {
@@ -103,7 +103,7 @@ describe 'slug', ->
             'Ź':'Z', 'Ż':'Z'
         }
         for char, replacement of char_map
-            [slug "foo #{char} bar baz"].should.eql ["foo-#{replacement}-bar-baz"]
+            [slug "foo #{char} bar baz"].should.eql ["foo-#{replacement}-bar-baz".toLowerCase()]
 
     it 'should replace latvian chars', ->
         char_map = {
@@ -112,8 +112,8 @@ describe 'slug', ->
             'Ķ':'K', 'Ļ':'L', 'Ņ':'N', 'Š':'S', 'Ū':'U', 'Ž':'Z'
         }
         for char, replacement of char_map
-            [slug "foo #{char} bar baz"].should.eql ["foo-#{replacement}-bar-baz"]
-    
+            [slug "foo #{char} bar baz"].should.eql ["foo-#{replacement}-bar-baz".toLowerCase()]
+
     it 'should replace vietnamese chars', ->
         char_map = {
             'Ạ': 'A', 'Ả': 'A', 'Ầ': 'A', 'Ấ': 'A', 'Ậ': 'A', 'Ẩ': 'A', 'Ẫ': 'A',
@@ -133,7 +133,7 @@ describe 'slug', ->
             'ỹ': 'y', 'đ': 'd'
         }
         for char, replacement of char_map
-            [slug "foo #{char} bar baz"].should.eql ["foo-#{replacement}-bar-baz"]        
+            [slug "foo #{char} bar baz"].should.eql ["foo-#{replacement}-bar-baz".toLowerCase()]
 
     it 'should replace currencies', ->
         char_map = {
@@ -159,7 +159,7 @@ describe 'slug', ->
         }
         for char, replacement of char_map
             [slug "foo #{char} bar baz",
-                mode: "rfc3986"].should.eql ["foo-#{replacement}-bar-baz"]
+                mode: "rfc3986"].should.eql ["foo-#{replacement}-bar-baz".toLowerCase()]
 
     it 'should replace symbols in pretty mode', ->
         char_map = {
@@ -170,7 +170,7 @@ describe 'slug', ->
             '<': 'less', '>': 'greater'
         }
         for char, replacement of char_map
-            [slug "foo #{char} bar baz"].should.eql ["foo-#{replacement}-bar-baz"]
+            [slug "foo #{char} bar baz"].should.eql ["foo-#{replacement}-bar-baz".toLowerCase()]
 
     it 'should remove ellipsis in pretty mode', ->
         char_map = {
@@ -205,10 +205,6 @@ describe 'slug', ->
         for char in char_map
             [slug "foo #{char} bar baz", symbols:no].should.eql ["foo-bar-baz"]
 
-    it 'should allow forcing lowercase slugs', ->
-        [slug('FOO Bar baZ').toLowerCase()].should.eql ['foo-bar-baz']
-        [slug('FOO Bar baZ', replacement:'_').toLowerCase()].should.eql ['foo_bar_baz']
-
     it 'should allow altering the charmap', ->
         charmap = {
             'f': 'ph', 'o':'0', 'b':'8', 'a':'4', 'r':'2', 'z':'5'
@@ -216,12 +212,22 @@ describe 'slug', ->
         [slug("foo bar baz", {charmap}).toUpperCase()].should.eql ['PH00-842-845']
 
     it 'should replace lithuanian characters', ->
-        slug('ąčęėįšųūžĄČĘĖĮŠŲŪŽ').should.eql 'aceeisuuzACEEISUUZ'
+        slug('ąčęėįšųūžĄČĘĖĮŠŲŪŽ').should.eql 'aceeisuuzaceeisuuz'
 
     it 'should replace multichars', ->
         [slug "w/ <3 && sugar || ☠"].should.eql ['with-love-and-sugar-or-skull-and-bones']
 
     it 'should be flavourable', ->
         text = "It's your journey ... we guide you through."
-        expected = "Its-your-journey-we-guide-you-through"
+        expected = "its-your-journey-we-guide-you-through"
         [slug(text, mode:'pretty')].should.eql [expected]
+
+    it 'should default to lowercase', ->
+      text = "It's Your Journey We Guide You Through."
+      expected = "its-your-journey-we-guide-you-through"
+      [slug(text)].should.eql [expected]
+
+    it 'should allow disabling of lowercase', ->
+      text = "It's Your Journey We Guide You Through."
+      expected = "Its-Your-Journey-We-Guide-You-Through"
+      [slug(text, lowercase: false)].should.eql [expected]
