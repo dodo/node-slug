@@ -35,8 +35,11 @@ print(slug('i ♥ unicode', '_')) // If you prefer something else then `-` as se
 // > i_love_unicode
 
 slug.charmap['♥'] = 'freaking love' // change default charmap or use option {charmap:{…}} as 2. argument
-print(slug('I ♥ UNICODE', {lowercase: false})) // If you prefer not lower case
+print(slug('I ♥ UNICODE'))
 // > I-freaking-love-UNICODE
+
+print(slug('☏-Number', {lower: true})) // If you prefer lower case
+// > telephone-number
 
 print(slug('i <3 unicode'))
 // > i-love-unicode
