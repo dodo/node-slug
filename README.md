@@ -64,7 +64,7 @@ slug.defaults.modes['rfc3986'] = {
 };
 slug.defaults.modes['pretty'] = {
     replacement: '-',
-    symbols. true,
+    symbols: true,
     remove: /[.]/g,
     lower: false,
     charmap: slug.charmap,
