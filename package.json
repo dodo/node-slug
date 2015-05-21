@@ -17,7 +17,5 @@
     "coffee-script": "~1.7.1"}
 , "bin": {
     "slug": "bin/slug.js"}
-, "licenses" : [
-    { "type": "MIT" ,
-      "url": "http://github.com/dodo/node-slug/raw/master/LICENSE"} ]
+, "license" : "MIT"
 }
