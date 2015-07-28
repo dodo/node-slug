@@ -232,3 +232,9 @@ describe 'slug', ->
       text = "It's Your Journey We Guide You Through."
       expected = "Its-Your-Journey-We-Guide-You-Through."
       [slug text, mode:'rfc3986', lower:off].should.eql [expected]
+
+    it 'should allow to limit slug words (5, i.e.)', ->
+      text = "It's Your Journey We Guide You Through."
+      expected = "Its-Your-Journey-We-Guide"
+      [slug text, limit:5].should.eql [expected]
+
