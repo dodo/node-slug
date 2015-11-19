@@ -70,7 +70,7 @@ function slug(string, opts) {
 };
 
 slug.defaults = {
-    mode: 'pretty',
+    mode: 'rfc3986',
 };
 
 slug.multicharmap = slug.defaults.multicharmap = {
