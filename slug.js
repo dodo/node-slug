@@ -2,47 +2,51 @@
 // lazy require symbols table
 var _symbols, removelist;
 function symbols(code) {
-    if (_symbols) return _symbols[code];
+    if (_symbols) {
+        return _symbols[code];
+    }
     _symbols = require('unicode/category/So');
     removelist = ['sign','cross','of','symbol','staff','hand','black','white']
-        .map(function (word) {return new RegExp(word, 'gi')});
+        .map(function (word) {return new RegExp(word, 'gi');});
     return _symbols[code];
+}
+
+function multicharat(index, string, multicharmap) {
+    for (var property in multicharmap) {
+        if (!multicharmap.hasOwnProperty(property)) {
+            continue;
+        }
+        if (string.indexOf(property) === index) {
+            return property;
+        }
+    }
 }
 
 function slug(string, opts) {
     string = string.toString();
-    if ('string' === typeof opts)
+    if ('string' === typeof opts) {
         opts = {replacement:opts};
+    }
     opts = opts || {};
     opts.mode = opts.mode || slug.defaults.mode;
     var defaults = slug.defaults.modes[opts.mode];
     var keys = ['replacement','multicharmap','charmap','remove','lower'];
-    for (var key, i = 0, l = keys.length; i < l; i++) { key = keys[i];
+    keys.forEach(function (key) {
         opts[key] = (key in opts) ? opts[key] : defaults[key];
-    }
-    if ('undefined' === typeof opts.symbols)
+    });
+    if ('undefined' === typeof opts.symbols) {
         opts.symbols = defaults.symbols;
-
-    var lengths = [];
-    for (var key in opts.multicharmap) {
-        if (!opts.multicharmap.hasOwnProperty(key))
-            continue;
-
-        var len = key.length;
-        if (lengths.indexOf(len) === -1)
-            lengths.push(len);
     }
 
-    var code, unicode, result = "";
-    for (var char, i = 0, l = string.length; i < l; i++) { char = string[i];
-        if (!lengths.some(function (len) {
-            var str = string.substr(i, len);
-            if (opts.multicharmap[str]) {
-                i += len - 1;
-                char = opts.multicharmap[str];
-                return true;
-            } else return false;
-        })) {
+    var code, unicode, result = '';
+    for (var char, i = 0, l = string.length; i < l; i++) {
+        char = string[i];
+        var multichar = multicharat(0, string.substring(i), opts.multicharmap);
+
+        if (multichar) {
+            i += multichar.length - 1;
+            char = opts.multicharmap[multichar];
+        } else {
             if (opts.charmap[char]) {
                 char = opts.charmap[char];
                 code = char.charCodeAt(0);
@@ -58,16 +62,16 @@ function slug(string, opts) {
             }
         }
         char = char.replace(/[^\w\s\-\.\_~]/g, ''); // allowed
-        if (opts.remove) char = char.replace(opts.remove, ''); // add flavour
+        if (opts.remove) {
+            char = char.replace(opts.remove, ''); // add flavour
+        }
         result += char;
     }
     result = result.replace(/^\s+|\s+$/g, ''); // trim leading/trailing spaces
     result = result.replace(/[-\s]+/g, opts.replacement); // convert spaces
     result = result.replace(opts.replacement+"$",''); // remove trailing separator
-    if (opts.lower)
-      result = result.toLowerCase();
-    return result;
-};
+    return opts.lower ? result.toLowerCase() : result;
+}
 
 slug.defaults = {
     mode: 'pretty',
@@ -186,27 +190,28 @@ slug.defaults.modes = {
 
 // Be compatible with different module systems
 
-if (typeof define !== 'undefined' && define.amd) { // AMD
-    // dont load symbols table in the browser
-    for (var key in slug.defaults.modes) {
-        if (!slug.defaults.modes.hasOwnProperty(key))
-            continue;
-
-        slug.defaults.modes[key].symbols = false;
-    }
-    define([], function () {return slug});
-} else if (typeof module !== 'undefined' && module.exports) { // CommonJS
+// CommonJS
+if (typeof module !== 'undefined' && module.exports) {
     symbols(); // preload symbols table
     module.exports = slug;
-} else { // Script tag
-    // dont load symbols table in the browser
-    for (var key in slug.defaults.modes) {
-        if (!slug.defaults.modes.hasOwnProperty(key))
-            continue;
-
-        slug.defaults.modes[key].symbols = false;
-    }
-    root.slug = slug;
+    return;
 }
+
+// dont load symbols table in the browser
+for (var key in slug.defaults.modes) {
+    if (!slug.defaults.modes.hasOwnProperty(key)) {
+        continue;
+    }
+    slug.defaults.modes[key].symbols = false;
+}
+
+// AMD
+if (typeof define !== 'undefined' && define.amd) {
+    define([], function () {return slug;});
+    return;
+}
+
+// Script tag
+root.slug = slug;
 
 }(this));

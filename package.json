@@ -8,10 +8,12 @@
 , "engines": {"node": ">= 0.4.x"}
 , "keywords": ["slugify", "slug", "string", "utf8", "utf-8", "unicode", "url"]
 , "scripts": {
+    "lint": "./node_modules/.bin/jshint slug.js",
     "test": "./node_modules/.bin/mocha ./test/*.test.* --require should --reporter spec --colors --compilers coffee:coffee-script/register"}
 , "dependencies": {
     "unicode": ">= 0.3.1"}
 , "devDependencies": {
+    "jshint": "~2.8.0",
     "mocha": "~1.17.1",
     "should": "~3.1.2",
     "coffee-script": "~1.7.1"}
