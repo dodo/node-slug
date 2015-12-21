@@ -1,3 +1,4 @@
+before_install: "npm install npm -g"
 before_script: "npm install --dev"
 script:
     - "npm run lint"
