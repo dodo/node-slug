@@ -57,7 +57,7 @@ function slug(string, opts) {
                 char = char.replace(/^\s+|\s+$/g, '');
             }
         }
-        char = char.replace(/[^\w\s\-\.\_~]/g, ''); // allowed
+        char = char.replace(/[^\w\s\-\.\_~\u0600-\u06FF]/g, ''); // allowed arabic
         if (opts.remove) char = char.replace(opts.remove, ''); // add flavour
         result += char;
     }
