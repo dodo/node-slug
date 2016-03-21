@@ -10,7 +10,7 @@ function symbols(code) {
 }
 
 function slug(string, opts) {
-    string = string.toString();
+    string = (string || '').toString();
     if ('string' === typeof opts)
         opts = {replacement:opts};
     opts = opts || {};
