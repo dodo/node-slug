@@ -80,6 +80,11 @@ When using browserify you might want to remove the symbols table from your bundl
 browserify slug.js --ignore unicode/category/So -s slug > slug-browser.js
 ```
 
+Alternatively, you may also require the browser build:
+```js
+var slug = require('slug/slug-browser')
+```
+
 [![Build Status](https://secure.travis-ci.org/dodo/node-slug.png)](http://travis-ci.org/dodo/node-slug)
 
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/dodo/node-slug/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
