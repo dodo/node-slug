@@ -1,4 +1,4 @@
-# [mollusc](https://github.com/Zertz/mollusc)
+# [mollusc](https://github.com/Zertz/mollusc) [![Build Status](https://travis-ci.org/Zertz/mollusc.svg?branch=master)](https://travis-ci.org/Zertz/mollusc) [![NPM version](https://badge.fury.io/js/mollusc.png)](http://badge.fury.io/js/mollusc)
 
 slugifies every string, even when it contains unicode!
 
