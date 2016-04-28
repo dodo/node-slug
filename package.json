@@ -30,10 +30,10 @@
     "unicode": ">= 0.3.1"
   },
   "devDependencies": {
-    "coffee-script": "~1.7.1",
-    "mocha": "~1.17.1",
-    "should": "~3.1.2",
-    "standard": "~6.0.8"
+    "coffee-script": "^1.7.1",
+    "mocha": "^1.17.1",
+    "should": "^3.1.2",
+    "standard": "^6.0.8"
   },
   "bin": {
     "slug": "bin/slug.js"
