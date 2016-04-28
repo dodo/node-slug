@@ -35,10 +35,5 @@
   "bin": {
     "slug": "bin/slug.js"
   },
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "http://github.com/Zertz/mollusc/raw/master/LICENSE"
-    }
-  ]
+  "license": "MIT"
 }
