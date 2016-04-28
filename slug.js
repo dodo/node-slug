@@ -69,11 +69,10 @@ function slug(string, opts) {
         result = split_array.join(' ');
     }
 
-    result = result.replace(/[-\s]+/g, opts.replacement); // convert spaces
-    result = result.replace(opts.replacement+"$",''); // remove trailing separator
-    if (opts.lower)
-      result = result.toLowerCase();
-    return result;
+    result = result.replace(/^\s+|\s+$/g, '') // trim leading/trailing spaces
+      .replace(/[-\s]+/g, opts.replacement)   // convert spaces
+      .replace(opts.replacement+"$",'');      // remove trailing separator
+    return (opts.lower) ? result.toLowerCase()  : result;
 };
 
 slug.defaults = {
