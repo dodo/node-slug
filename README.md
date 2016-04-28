@@ -12,7 +12,7 @@ Make strings url-safe.
 - Works in browser (window.slug) and AMD/CommonJS-flavoured module loaders (except the unicode symbols unless you use browserify but who wants to download a ~2mb js file, right?)
 
 ```
-npm install slug
+npm install mollusc
 ```
 
 ```
