@@ -13,6 +13,9 @@ describe 'slug', ->
     it 'should remove trailing space if any', ->
         [slug ' foo bar baz '].should.eql ['foo-bar-baz']
 
+    it 'should remove trailing separator if any', ->
+        [slug ' foo bar baz-'].should.eql ['foo-bar-baz']
+
     it 'should remove not allowed chars', ->
         [slug 'foo, bar baz'].should.eql ['foo-bar-baz']
         [slug 'foo- bar baz'].should.eql ['foo-bar-baz']

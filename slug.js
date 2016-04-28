@@ -61,7 +61,6 @@ function slug(string, opts) {
         if (opts.remove) char = char.replace(opts.remove, ''); // add flavour
         result += char;
     }
-    result = result.replace(/^\s+|\s+$/g, ''); // trim leading/trailing spaces
 
     if (opts.limit) {
         var split_array = result.split(' ');
@@ -71,7 +70,7 @@ function slug(string, opts) {
 
     result = result.replace(/^\s+|\s+$/g, '') // trim leading/trailing spaces
       .replace(/[-\s]+/g, opts.replacement)   // convert spaces
-      .replace(opts.replacement+"$",'');      // remove trailing separator
+      .replace(new RegExp(opts.replacement + '$'),'');      // remove trailing separator
     return (opts.lower) ? result.toLowerCase()  : result;
 };
 
