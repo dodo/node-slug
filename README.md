@@ -15,10 +15,6 @@ Make strings url-safe.
 npm install mollusc
 ```
 
-```
-bower install slug
-```
-
 ## example
 
 ```javascript
