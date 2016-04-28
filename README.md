@@ -1,4 +1,4 @@
-# [mollusc](https://github.com/Zertz/node-slug)
+# [mollusc](https://github.com/Zertz/mollusc)
 
 slugifies every string, even when it contains unicode!
 

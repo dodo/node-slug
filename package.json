@@ -2,11 +2,11 @@
   "name": "mollusc",
   "description": "slugifies even utf-8 chars!",
   "version": "0.9.2",
-  "homepage": "https://github.com/Zertz/node-slug",
+  "homepage": "https://github.com/Zertz/mollusc",
   "author": "Zertz (https://github.com/Zertz)",
   "repository": {
     "type": "git",
-    "url": "git://github.com/Zertz/node-slug.git"
+    "url": "git://github.com/Zertz/mollusc.git"
   },
   "main": "slug.js",
   "engines": {
@@ -38,7 +38,7 @@
   "licenses": [
     {
       "type": "MIT",
-      "url": "http://github.com/Zertz/node-slug/raw/master/LICENSE"
+      "url": "http://github.com/Zertz/mollusc/raw/master/LICENSE"
     }
   ]
 }
