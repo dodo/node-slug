@@ -10,7 +10,7 @@
   },
   "main": "slug.js",
   "engines": {
-    "node": ">= 0.4.x"
+    "node": ">=0.12.0"
   },
   "keywords": [
     "slugify",
