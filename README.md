@@ -4,8 +4,7 @@
 
 - respecting [RFC 3986](https://tools.ietf.org/html/rfc3986)
 - Comprehensive tests
-- No dependencies (except the unicode table)
-- Not in coffee-script (except the tests lol)
+- No dependencies, except unicode data
 - Coerces foreign symbols to their english equivalent
 - Works in browser (window.slug) and AMD/CommonJS-flavoured module loaders (except the unicode symbols unless you use browserify but who wants to download a ~2MB js file, right?)
 
@@ -26,10 +25,12 @@ slug('i ♥ unicode')
 slug('unicode ♥ is ☢')
 //= unicode-love-is-radioactive
 
-slug('i ♥ unicode', '_')) // If you prefer something else then `-` as seperator
+slug('i ♥ unicode', {
+  replacement: '_'
+})
 //= i_love_unicode
 
-slug.charmap['♥'] = 'freaking love' // change default charmap or use option {charmap:{…}} as 2. argument
+slug.charmap['♥'] = 'freaking love'
 slug('I ♥ UNICODE')
 //= i-freaking-love-unicode
 
@@ -95,10 +96,10 @@ Type: `Boolean`
 
 Default: `slug.multicharmap`
 
-## browser
+## Browser
 
-When using browserify you might want to remove the symbols table from your bundle by using `--ignore` similar to this:
+When using browserify you might want to remove the symbols table from your bundle.
+
 ```bash
-# generates a standalone slug browser bundle:
 browserify slug.js --ignore unicode-json/category/So -s slug > slug-browser.js
 ```
