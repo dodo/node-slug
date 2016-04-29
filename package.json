@@ -34,9 +34,6 @@
     "should": "^3.1.2",
     "standard": "^6.0.8"
   },
-  "bin": {
-    "slug": "bin/slug.js"
-  },
   "license": "MIT",
   "standard": {
     "globals": [
