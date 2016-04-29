@@ -33,19 +33,12 @@
   }
 
   function setDefaults (opts) {
-    var keys = ['replacement', 'multicharmap', 'charmap', 'remove', 'lower']
+    var keys = ['charmap', 'lower', 'multicharmap', 'remove', 'replacement', 'symbols']
 
     opts = opts || {}
-    opts.mode = opts.mode || slug.defaults.mode
-
-    var defaults = slug.defaults.modes[opts.mode]
 
     for (var i = 0, length = keys.length; i < length; i++) {
-      opts[keys[i]] = (keys[i] in opts) ? opts[keys[i]] : defaults[keys[i]]
-    }
-
-    if (typeof opts.symbols === 'undefined') {
-      opts.symbols = defaults.symbols
+      opts[keys[i]] = opts[keys[i]] === undefined ? slug.defaults[keys[i]] : opts[keys[i]]
     }
 
     return opts
@@ -53,12 +46,6 @@
 
   function slug (string, opts) {
     string = string.toString()
-
-    if (typeof opts === 'string') {
-      opts = {
-        replacement: opts
-      }
-    }
 
     opts = setDefaults(opts)
 
@@ -122,11 +109,12 @@
   }
 
   slug.defaults = {
-    mode: 'pretty'
-  }
-
-  slug.multicharmap = slug.defaults.multicharmap = {
-    '<3': 'love', '&&': 'and', '||': 'or', 'w/': 'with'
+    replacement: '-',
+    symbols: true,
+    remove: null,
+    lower: true,
+    charmap: slug.charmap,
+    multicharmap: slug.multicharmap
   }
 
   // https://code.djangoproject.com/browser/django/trunk/django/contrib/admin/media/js/urlify.js
@@ -223,24 +211,7 @@
     '<': 'less', '>': 'greater', '×': 'x'
   }
 
-  slug.defaults.modes = {
-    rfc3986: {
-      replacement: '-',
-      symbols: true,
-      remove: null,
-      lower: true,
-      charmap: slug.defaults.charmap,
-      multicharmap: slug.defaults.multicharmap
-    },
-    pretty: {
-      replacement: '-',
-      symbols: true,
-      remove: /[.]/g,
-      lower: false,
-      charmap: slug.defaults.charmap,
-      multicharmap: slug.defaults.multicharmap
-    }
-  }
+  slug.multicharmap = slug.defaults.multicharmap = {}
 
   // Be compatible with different module systems
 
@@ -249,12 +220,12 @@
     module.exports = slug
   } else {
     // dont load symbols table in the browser
-    for (var key in slug.defaults.modes) {
-      if (!slug.defaults.modes.hasOwnProperty(key)) {
+    for (var key in slug.defaults) {
+      if (!slug.defaults.hasOwnProperty(key)) {
         continue
       }
 
-      slug.defaults.modes[key].symbols = false
+      slug.defaults.symbols = false
     }
 
     if (typeof define !== 'undefined' && define.amd) { // AMD

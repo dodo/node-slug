@@ -22,15 +22,14 @@
     "url"
   ],
   "scripts": {
-    "lint": "standard slug.js",
+    "lint": "standard",
     "pretest": "npm run lint",
-    "test": "./node_modules/.bin/mocha ./test/*.test.* --require should --reporter spec --colors --compilers coffee:coffee-script/register"
+    "test": "mocha --require should"
   },
   "dependencies": {
     "unicode-json": "~1.0.0"
   },
   "devDependencies": {
-    "coffee-script": "^1.7.1",
     "mocha": "^1.17.1",
     "should": "^3.1.2",
     "standard": "^6.0.8"
@@ -41,7 +40,9 @@
   "license": "MIT",
   "standard": {
     "globals": [
-      "define"
+      "define",
+      "describe",
+      "it"
     ]
   }
 }

@@ -1,72 +1,99 @@
 # [mollusc](https://github.com/Zertz/mollusc) [![Build Status](https://travis-ci.org/Zertz/mollusc.svg?branch=master)](https://travis-ci.org/Zertz/mollusc) [![NPM version](https://badge.fury.io/js/mollusc.png)](http://badge.fury.io/js/mollusc)
 
-slugifies every string, even when it contains unicode!
-
-Make strings url-safe.
+> Make strings url-safe and replace unicode symbols with their name
 
 - respecting [RFC 3986](https://tools.ietf.org/html/rfc3986)
 - Comprehensive tests
 - No dependencies (except the unicode table)
 - Not in coffee-script (except the tests lol)
 - Coerces foreign symbols to their english equivalent
-- Works in browser (window.slug) and AMD/CommonJS-flavoured module loaders (except the unicode symbols unless you use browserify but who wants to download a ~2mb js file, right?)
+- Works in browser (window.slug) and AMD/CommonJS-flavoured module loaders (except the unicode symbols unless you use browserify but who wants to download a ~2MB js file, right?)
+
+## Install
 
 ```
 npm install mollusc
 ```
 
-## example
+## Usage
 
-```javascript
-var slug = require('slug')
-var print = console.log.bind(console, '>')
+```js
+const slug = require('mollusc')
 
-print(slug('i ♥ unicode'))
-// > i-love-unicode
+slug('i ♥ unicode')
+//= i-love-unicode
 
-print(slug('unicode ♥ is ☢')) // yes!
-// > unicode-love-is-radioactive
+slug('unicode ♥ is ☢')
+//= unicode-love-is-radioactive
 
-print(slug('i ♥ unicode', '_')) // If you prefer something else then `-` as seperator
-// > i_love_unicode
+slug('i ♥ unicode', '_')) // If you prefer something else then `-` as seperator
+//= i_love_unicode
 
 slug.charmap['♥'] = 'freaking love' // change default charmap or use option {charmap:{…}} as 2. argument
-print(slug('I ♥ UNICODE'))
-// > I-freaking-love-UNICODE
+slug('I ♥ UNICODE')
+//= i-freaking-love-unicode
 
-print(slug('☏-Number', {lower: true})) // If you prefer lower case
-// > telephone-number
-
-print(slug('i <3 unicode'))
-// > i-love-unicode
+slug('☏-NUMBER', {
+  lower: false
+})
+//= telephone-NUMBER
 ```
 
-## options
+## API
 
-```javascript
-// options is either object or replacement (sets options.replacement)
-slug('string', [{options} || 'replacement']);
+```js
+slug(input[, options])
 ```
 
-```javascript
-slug.defaults.mode ='pretty';
-slug.defaults.modes['rfc3986'] = {
-    replacement: '-',      // replace spaces with replacement
-    symbols: true,         // replace unicode symbols or not
-    remove: null,          // (optional) regex to remove characters
-    lower: true,           // result in lower case
-    charmap: slug.charmap, // replace special characters
-    multicharmap: slug.multicharmap // replace multi-characters
-};
-slug.defaults.modes['pretty'] = {
-    replacement: '-',
-    symbols: true,
-    remove: /[.]/g,
-    lower: false,
-    charmap: slug.charmap,
-    multicharmap: slug.multicharmap
-};
-```
+### options
+
+#### replacement
+
+Replace spaces with value.
+
+Type: `string`
+
+Default: `-`
+
+#### symbols
+
+Replace unicode symbols with their name.
+
+Type: `Boolean`
+
+Default: `true`
+
+#### remove
+
+Regex to remove characters.
+
+Type: `Boolean`
+
+Default: `null`
+
+#### lower
+
+Convert result to lower case.
+
+Type: `Boolean`
+
+Default: `true`
+
+#### charmap
+
+Replace special characters.
+
+Type: `Boolean`
+
+Default: `slug.charmap`
+
+#### multicharmap
+
+Replace strings with another string.
+
+Type: `Boolean`
+
+Default: `slug.multicharmap`
 
 ## browser
 
