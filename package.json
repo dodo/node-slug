@@ -1,7 +1,7 @@
 {
   "name": "mollusc",
   "description": "slugifies even utf-8 chars!",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "homepage": "https://github.com/Zertz/mollusc",
   "author": "Zertz (https://github.com/Zertz)",
   "repository": {
