@@ -10,6 +10,11 @@ describe 'slug', ->
         [slug 'foo bar baz', '_'].should.eql ['foo_bar_baz']
         [slug 'foo bar baz', ''].should.eql ['foobarbaz']
 
+    it 'should remove duplicate custom separators', ->
+        text = "looooooooooooool"
+        expected = "lol"
+        [slug text, 'o'].should.eql [expected]
+
     it 'should remove trailing space if any', ->
         [slug ' foo bar baz '].should.eql ['foo-bar-baz']
 
@@ -226,6 +231,11 @@ describe 'slug', ->
     it 'should default to lowercase in rfc3986 mode', ->
       text = "It's Your Journey We Guide You Through."
       expected = "its-your-journey-we-guide-you-through."
+      [slug text, mode:'rfc3986'].should.eql [expected]
+
+    it 'should trim leading / trailing separators', ->
+      text = "--words go here--"
+      expected = "words-go-here"
       [slug text, mode:'rfc3986'].should.eql [expected]
 
     it 'should allow disabling of lowercase', ->
