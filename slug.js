@@ -9,6 +9,13 @@ function symbols(code) {
     return _symbols[code];
 }
 
+function escapeChar(ch) {
+    if (!ch) { return ""; }
+    var out = ch.charCodeAt(0).toString(16);
+    while (out.length < 4) { out = "0" + out; }
+    return "\\u" + out;
+}
+
 function slug(string, opts) {
     string = string.toString();
     if ('string' === typeof opts)
@@ -61,9 +68,10 @@ function slug(string, opts) {
         if (opts.remove) char = char.replace(opts.remove, ''); // add flavour
         result += char;
     }
+    var replacement_re = escapeChar(opts.replacement);
     result = result.replace(/^\s+|\s+$/g, ''); // trim leading/trailing spaces
-    result = result.replace(/[-\s]+/g, opts.replacement); // convert spaces
-    result = result.replace(opts.replacement+"$",''); // remove trailing separator
+    result = result.replace(new RegExp("[\\s"+replacement_re+"]+", "g"), opts.replacement); // convert spaces
+    result = result.replace(new RegExp("^"+replacement_re+"|"+replacement_re+"$", "g"),''); // remove leading/trailing separators
     if (opts.lower)
       result = result.toLowerCase();
     return result;
