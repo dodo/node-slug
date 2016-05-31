@@ -10,6 +10,8 @@ function symbols(code) {
 }
 
 function slug(string, opts) {
+    if (string === null || string === undefined)
+        throw new Error('Slug input must be castable to string')
     string = string.toString();
     if ('string' === typeof opts)
         opts = {replacement:opts};
