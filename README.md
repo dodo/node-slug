@@ -84,7 +84,7 @@ Default: `true`
 
 Replace special characters.
 
-Type: `Boolean`
+Type: `Object`
 
 Default: `slug.charmap`
 
@@ -92,7 +92,7 @@ Default: `slug.charmap`
 
 Replace strings with another string.
 
-Type: `Boolean`
+Type: `Object`
 
 Default: `slug.multicharmap`
 
