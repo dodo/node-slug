@@ -285,4 +285,13 @@ describe('slug', function () {
       limit: 5
     }).should.eql('its-your-journey-we-guide')
   })
+
+  it('should remove disallowed characters even if they are in the char map', function () {
+    var charMap = {
+      '©': '(c)'
+    }
+    slug('mollusc ©', {
+      charmap: charMap
+    }).should.eql('mollusc-c')
+  })
 })
