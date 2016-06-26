@@ -294,4 +294,13 @@ describe('slug', function () {
       charmap: charMap
     }).should.eql('mollusc-c')
   })
+
+  it('should allow you to replace valid characters with an empty string', function () {
+    var charMap = {
+      '.': ''
+    }
+    slug('my.string', {
+      charmap: charMap
+    }).should.eql('mystring')
+  })
 })
