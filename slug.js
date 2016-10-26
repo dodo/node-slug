@@ -16,7 +16,7 @@ function slug(string, opts) {
     opts = opts || {};
     opts.mode = opts.mode || slug.defaults.mode;
     var defaults = slug.defaults.modes[opts.mode];
-    var keys = ['replacement','multicharmap','charmap','remove','lower'];
+    var keys = ['replacement','multicharmap','charmap','remove','lower', 'allowed'];
     for (var key, i = 0, l = keys.length; i < l; i++) { key = keys[i];
         opts[key] = (key in opts) ? opts[key] : defaults[key];
     }
@@ -57,7 +57,7 @@ function slug(string, opts) {
                 char = char.replace(/^\s+|\s+$/g, '');
             }
         }
-        char = char.replace(/[^\w\s\-\.\_~]/g, ''); // allowed
+        char = char.replace(opts.allowed, ''); // allowed
         if (opts.remove) char = char.replace(opts.remove, ''); // add flavour
         result += char;
     }
@@ -165,12 +165,15 @@ slug.charmap  = slug.defaults.charmap = {
     '<': 'less', '>': 'greater',
 };
 
+slug.allowed = slug.defaults.allowed = /[^\w\s\-\.\_~]/g;
+
 slug.defaults.modes = {
     rfc3986: {
         replacement: '-',
         symbols: true,
         remove: null,
         lower: true,
+        allowed: slug.defaults.allowed,
         charmap: slug.defaults.charmap,
         multicharmap: slug.defaults.multicharmap,
     },
@@ -178,6 +181,7 @@ slug.defaults.modes = {
         replacement: '-',
         symbols: true,
         remove: /[.]/g,
+        allowed: slug.defaults.allowed,
         lower: false,
         charmap: slug.defaults.charmap,
         multicharmap: slug.defaults.multicharmap,
