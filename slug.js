@@ -3,7 +3,11 @@
 var _symbols, removelist;
 function symbols(code) {
     if (_symbols) return _symbols[code];
-    _symbols = require('unicode/category/So');
+    try {
+        _symbols = require('unicode/category/So');
+    } catch (e) {
+        _symbols = {};
+    }
     removelist = ['sign','cross','of','symbol','staff','hand','black','white']
         .map(function (word) {return new RegExp(word, 'gi')});
     return _symbols[code];
