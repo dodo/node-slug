@@ -1,4 +1,4 @@
-# [slug](https://github.com/dodo/node-slug)
+# [mollusc](https://github.com/Zertz/mollusc) [![Build Status](https://travis-ci.org/Zertz/mollusc.svg?branch=master)](https://travis-ci.org/Zertz/mollusc) [![NPM version](https://badge.fury.io/js/mollusc.png)](http://badge.fury.io/js/mollusc)
 
 slugifies every string, even when it contains unicode!
 
@@ -79,8 +79,3 @@ When using browserify you might want to remove the symbols table from your bundl
 # generates a standalone slug browser bundle:
 browserify slug.js --ignore unicode/category/So -s slug > slug-browser.js
 ```
-
-[![Build Status](https://secure.travis-ci.org/dodo/node-slug.png)](http://travis-ci.org/dodo/node-slug)
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/dodo/node-slug/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-
