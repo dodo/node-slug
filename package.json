@@ -41,5 +41,8 @@
       "describe",
       "it"
     ]
-  }
+  },
+  "files": [
+    "slug.js"
+  ]
 }
