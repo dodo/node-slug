@@ -61,7 +61,7 @@ function slug(string, opts) {
         if (opts.remove) char = char.replace(opts.remove, ''); // add flavour
         result += char;
     }
-    result = result.replace(/^\s+|\s+$/g, ''); // trim leading/trailing spaces
+    result = result.trim();
     result = result.replace(/[-\s]+/g, opts.replacement); // convert spaces
     result = result.replace(opts.replacement+"$",''); // remove trailing separator
     if (opts.lower)
