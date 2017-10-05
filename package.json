@@ -27,7 +27,7 @@
     "test": "mocha --require should"
   },
   "dependencies": {
-    "unicode-json": "~1.0.0"
+    "unicode-json": "~2.0.0"
   },
   "devDependencies": {
     "mocha": "^1.17.1",
