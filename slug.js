@@ -45,7 +45,7 @@
   }
 
   function slug (string, opts) {
-    if ('string' !== typeof string) {
+    if (typeof string !== 'string') {
       throw new Error('input must be a string')
     }
 

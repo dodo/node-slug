@@ -1,9 +1,12 @@
+var should = require('should')
+
 var slug = require('./slug')
 
 describe('slug', function () {
-  it('should convert input to string', function () {
-    slug(1).should.eql('1')
-    slug(567890).should.eql('567890')
+  it('should throw when input is not a string', function () {
+    should(function () {
+      slug(42)
+    }).throw('input must be a string')
   })
 
   it('should replace whitespaces with replacement', function () {
