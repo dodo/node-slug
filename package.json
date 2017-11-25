@@ -1,23 +1,48 @@
-{ "name": "slug"
-, "description": "slugifies even utf-8 chars!"
-, "version": "0.9.1"
-, "homepage": "https://github.com/dodo/node-slug"
-, "author": "dodo (https://github.com/dodo)"
-, "repository": {"type": "git", "url": "git://github.com/dodo/node-slug.git"}
-, "main": "slug.js"
-, "engines": {"node": ">= 0.4.x"}
-, "keywords": ["slugify", "slug", "string", "utf8", "utf-8", "unicode", "url"]
-, "scripts": {
-    "test": "./node_modules/.bin/mocha ./test/*.test.* --require should --reporter spec --colors --compilers coffee:coffee-script/register"}
-, "dependencies": {
-    "unicode": ">= 0.3.1"}
-, "devDependencies": {
-    "mocha": "~1.17.1",
-    "should": "~3.1.2",
-    "coffee-script": "~1.7.1"}
-, "bin": {
-    "slug": "bin/slug.js"}
-, "licenses" : [
-    { "type": "MIT" ,
-      "url": "http://github.com/dodo/node-slug/raw/master/LICENSE"} ]
+{
+  "name": "mollusc",
+  "description": "slugifies even utf-8 chars!",
+  "version": "1.2.0",
+  "homepage": "https://github.com/Zertz/mollusc",
+  "author": "Zertz (https://github.com/Zertz)",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Zertz/mollusc.git"
+  },
+  "main": "slug.js",
+  "engines": {
+    "node": ">=4"
+  },
+  "keywords": [
+    "slugify",
+    "slug",
+    "string",
+    "utf8",
+    "utf-8",
+    "unicode",
+    "url"
+  ],
+  "scripts": {
+    "lint": "standard",
+    "pretest": "npm run lint",
+    "test": "mocha --require should"
+  },
+  "dependencies": {
+    "unicode-json": "~2.0.0"
+  },
+  "devDependencies": {
+    "mocha": "^1.17.1",
+    "should": "^3.1.2",
+    "standard": "^6.0.8"
+  },
+  "license": "MIT",
+  "standard": {
+    "globals": [
+      "define",
+      "describe",
+      "it"
+    ]
+  },
+  "files": [
+    "slug.js"
+  ]
 }

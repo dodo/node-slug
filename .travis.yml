@@ -1,6 +1,11 @@
-before_script: "npm install --dev"
+before_script: "npm install --only=dev"
 script: "npm test"
 language: node_js
 node_js:
-    - 0.8
-    - 0.10
+    - 4
+    - 6
+    - 8
+    - 9
+branches:
+  only:
+    - master
