@@ -45,7 +45,9 @@
   }
 
   function slug (string, opts) {
-    string = string.toString()
+    if ('string' !== typeof string) {
+      throw new Error('input must be a string')
+    }
 
     opts = setDefaults(opts)
 
