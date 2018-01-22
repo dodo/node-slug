@@ -82,5 +82,7 @@ browserify slug.js --ignore unicode/category/So -s slug > slug-browser.js
 
 [![Build Status](https://secure.travis-ci.org/dodo/node-slug.png)](http://travis-ci.org/dodo/node-slug)
 
+[![Releases](https://coderelease.io/badge/dodo/node-slug)](https://coderelease.io/github/repository/dodo/node-slug)
+
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/dodo/node-slug/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
