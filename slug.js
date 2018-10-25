@@ -54,14 +54,14 @@ function slug(string, opts) {
                 for(var j = 0, rl = removelist.length; j < rl; j++) {
                     char = char.replace(removelist[j], '');
                 }
-                char = char.replace(/^\s+|\s+$/g, '');
+                char = char.trim();
             }
         }
         char = char.replace(/[^\w\s\-\.\_~]/g, ''); // allowed
         if (opts.remove) char = char.replace(opts.remove, ''); // add flavour
         result += char;
     }
-    result = result.replace(/^\s+|\s+$/g, ''); // trim leading/trailing spaces
+    result = result.trim();
     result = result.replace(/[-\s]+/g, opts.replacement); // convert spaces
     result = result.replace(opts.replacement+"$",''); // remove trailing separator
     if (opts.lower)
