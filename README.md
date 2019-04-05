@@ -31,7 +31,7 @@ print(slug('i ♥ unicode'))
 print(slug('unicode ♥ is ☢')) // yes!
 // > unicode-love-is-radioactive
 
-print(slug('i ♥ unicode', '_')) // If you prefer something else then `-` as seperator
+print(slug('i ♥ unicode', '_')) // If you prefer something else than `-` as separator
 // > i_love_unicode
 
 slug.charmap['♥'] = 'freaking love' // change default charmap or use option {charmap:{…}} as 2. argument
